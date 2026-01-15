@@ -14,7 +14,7 @@
   </a>
 </p>
 
-Here is the repository for my personal portfolio, explore it at [satyansh.indevs.in](https://satyansh.indevs.in) to know about me. 
+Here is the repository for my personal portfolio, explore it at [satyansh.indevs.in](https://satyansh.indevs.in) to know what I am upto. 
 
 ## 🚀 Key Features
 
