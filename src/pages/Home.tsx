@@ -3,6 +3,7 @@ import EntranceScreen from '../components/EntranceScreen';
 import Terminal from '../components/Terminal/Terminal';
 import ProjectsModal from '../components/ProjectsModal';
 import StaticView from '../components/StaticView';
+import WorkstationSidebar from '../components/layout/WorkstationSidebar';
 
 interface HomeProps {
   onEnter: () => void;
@@ -24,25 +25,30 @@ const Home: React.FC<HomeProps> = ({ onEnter, hasEntered, isTerminalMode, onTogg
   };
 
   return (
-    <div className="relative h-screen w-full overflow-hidden">
+    <div className="relative h-screen w-full flex overflow-hidden">
       {!hasEntered && (
         <EntranceScreen onEnter={handleEnter} isExiting={isExiting} />
       )}
 
-      {hasEntered && isTerminalMode && (
-        <div className="h-full w-full animate-fade-in pt-16">
-          <Terminal 
-            onOpenModal={() => setIsModalOpen(true)}
-          />
-        </div>
+      {hasEntered && (
+        <>
+          <div className="flex-1 min-w-0 h-full relative">
+            {isTerminalMode ? (
+              <div className="h-full w-full animate-fade-in pt-16">
+                <Terminal onOpenModal={() => setIsModalOpen(true)} />
+              </div>
+            ) : (
+              <div className="h-full w-full pt-16 overflow-hidden">
+                <StaticView />
+              </div>
+            )}
+          </div>
+          
+          <div className={`transition-all duration-1000 transform ${hasEntered ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}`}>
+            <WorkstationSidebar />
+          </div>
+        </>
       )}
-
-      {hasEntered && !isTerminalMode && (
-        <div className="h-full w-full pt-16">
-          <StaticView />
-        </div>
-      )}
-
 
       {isModalOpen && (
         <ProjectsModal onClose={() => setIsModalOpen(false)} />

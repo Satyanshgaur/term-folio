@@ -125,35 +125,50 @@ export const useTerminal = (onOpenModal: () => void) => {
         addLine({
           type: 'output',
           content: (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 max-w-4xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8 max-w-5xl">
               {[
                 {
                   id: 'graphrag',
                   title: 'GraphRAG Engine',
                   desc: 'High-performance knowledge graph reasoning system for LLMs.',
-                  tags: ['C++', 'CUDA'],
-                  color: 'syntax-blue'
+                  metric: '4.2M Edges/sec',
+                  metricLabel: 'Throughput',
+                  tags: ['C++', 'CUDA', 'Python'],
+                  icon: 'schema'
                 },
                 {
                   id: 'satellite',
                   title: 'Satellite Optimizer',
                   desc: 'Real-time link budget optimizer for LEO constellations.',
-                  tags: ['Rust', 'Vulkan'],
-                  color: 'syntax-green'
+                  metric: '~12ms Latency',
+                  metricLabel: 'P99_Response',
+                  tags: ['Rust', 'Vulkan', 'Wasm'],
+                  icon: 'settings_input_antenna'
                 }
               ].map(p => (
-                <div key={p.id} className="p-5 rounded border border-border-glass bg-white/5 backdrop-blur-sm group hover:border-text-main/20 transition-all">
-                  <h3 className="text-text-main font-bold mb-1 uppercase tracking-tight">{p.title}</h3>
-                  <p className="text-xs opacity-60 mb-4 h-10">{p.desc}</p>
-                  <div className="flex items-center justify-between">
-                    <div className="flex gap-2">
+                <div key={p.id} className="p-8 rounded-2xl border border-border-glass bg-white/5 backdrop-blur-sm group hover:border-syntax-blue/30 transition-all flex flex-col gap-6 shadow-2xl relative overflow-hidden">
+                  <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-20 transition-opacity">
+                    <span className="material-symbols-outlined text-7xl">{p.icon}</span>
+                  </div>
+                  <div className="flex justify-between items-start relative z-10">
+                    <h3 className="text-3xl font-bold text-text-main uppercase tracking-tighter">{p.title}</h3>
+                    <div className="text-right">
+                      <span className="block text-[9px] uppercase tracking-widest text-text-main/40 mb-1">{p.metricLabel}</span>
+                      <span className="text-syntax-yellow font-bold text-sm tracking-tight">{p.metric}</span>
+                    </div>
+                  </div>
+                  <p className="text-text-main/50 text-base leading-relaxed max-w-sm relative z-10">{p.desc}</p>
+                  <div className="mt-auto pt-6 border-t border-border-glass/30 flex items-center justify-between relative z-10">
+                    <div className="flex gap-3">
                       {p.tags.map(t => (
-                        <span key={t} className={`text-[9px] uppercase font-bold ${p.color} opacity-80`}>[{t}]</span>
+                        <span key={t} className="px-2 py-0.5 bg-white/5 border border-border-glass text-[9px] uppercase tracking-widest font-bold text-text-main/60">
+                          {t}
+                        </span>
                       ))}
                     </div>
                     <button 
                       onClick={() => executeCommand(`project ${p.id}`)}
-                      className="text-[10px] uppercase text-text-main/40 hover:text-text-main transition-colors"
+                      className="text-[11px] font-bold uppercase tracking-[0.2em] text-syntax-blue hover:underline underline-offset-8"
                     >
                       SPEC_ANALYSIS &gt;
                     </button>
@@ -168,36 +183,92 @@ export const useTerminal = (onOpenModal: () => void) => {
       case 'project':
         const projectId = args[1];
         if (!projectId) {
-          addLine({ type: 'error', content: 'Usage: project [id]. Options: graphrag, satellite, portfolio-os' });
+          addLine({ type: 'error', content: 'Usage: project [id]. Available: graphrag, satellite, portfolio-os' });
         } else {
           addLine({
             type: 'output',
             content: (
-              <div className="mt-6 space-y-6 max-w-3xl border-l-2 border-border-glass pl-6">
-                <h2 className="text-2xl font-bold text-text-main uppercase tracking-tighter">{projectId.replace('-', ' ')}</h2>
-                <div className="grid grid-cols-3 gap-4">
-                  <div className="p-3 border border-border-glass bg-white/5 text-center">
-                    <span className="block text-[10px] opacity-40 uppercase tracking-widest mb-1">Latency</span>
-                    <span className="text-syntax-blue text-sm font-bold">~12.4ms</span>
-                  </div>
-                  <div className="p-3 border border-border-glass bg-white/5 text-center">
-                    <span className="block text-[10px] opacity-40 uppercase tracking-widest mb-1">Throughput</span>
-                    <span className="text-syntax-blue text-sm font-bold">850 req/s</span>
-                  </div>
-                  <div className="p-3 border border-border-glass bg-white/5 text-center">
-                    <span className="block text-[10px] opacity-40 uppercase tracking-widest mb-1">Status</span>
-                    <span className="text-syntax-green text-sm font-bold uppercase">Optimized</span>
+              <div className="mt-12 space-y-12 max-w-5xl animate-fade-in pb-20">
+                <div className="space-y-4 border-l-2 border-syntax-blue pl-8">
+                  <span className="text-[10px] uppercase tracking-[0.4em] text-text-main/30 font-bold">System_Artifact // {projectId}</span>
+                  <h2 className="text-5xl font-bold text-text-main uppercase tracking-tighter">{projectId.replace('-', ' ')}</h2>
+                  <div className="flex gap-6 pt-2">
+                    <div className="flex flex-col">
+                      <span className="text-[9px] uppercase tracking-widest text-text-main/40">Status</span>
+                      <span className="text-syntax-green font-bold text-xs uppercase tracking-widest">Optimized_Stable</span>
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-[9px] uppercase tracking-widest text-text-main/40">Build</span>
+                      <span className="text-text-main font-bold text-xs uppercase tracking-widest">v2.4.0-release</span>
+                    </div>
                   </div>
                 </div>
-                <div className="space-y-4">
-                  <h4 className="text-[10px] uppercase tracking-[0.2em] font-bold text-text-main/40">[ DESIGN_LOG ]</h4>
-                  <p className="text-sm opacity-70 leading-relaxed italic">
-                    "Kernel fusion implemented to reduce memory trips. Triton compiler utilized for hardware-specific optimizations."
-                  </p>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                  {/* Architecture Visualization */}
+                  <div className="space-y-6">
+                    <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-syntax-blue opacity-60 flex items-center gap-2">
+                      <span className="w-4 h-px bg-syntax-blue/30"></span> ARCHITECTURE
+                    </h4>
+                    <div className="aspect-video bg-white/5 border border-border-glass rounded-2xl flex flex-col items-center justify-center p-8 group hover:bg-white/10 transition-colors relative overflow-hidden">
+                       <div className="absolute inset-0 grid grid-cols-6 grid-rows-6 opacity-[0.03] pointer-events-none">
+                          {[...Array(36)].map((_, i) => <div key={i} className="border border-text-main"></div>)}
+                       </div>
+                       <span className="material-symbols-outlined text-7xl text-text-main/10 group-hover:text-syntax-blue/20 transition-all scale-110">hub</span>
+                       <p className="mt-4 text-[10px] uppercase tracking-widest text-text-main/40 font-mono">[ Parallel Graph Traversal Subsystem ]</p>
+                    </div>
+                  </div>
+
+                  {/* Performance Benchmarks */}
+                  <div className="space-y-6">
+                    <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-syntax-yellow opacity-60 flex items-center gap-2">
+                      <span className="w-4 h-px bg-syntax-yellow/30"></span> PERFORMANCE_BENCHMARKS
+                    </h4>
+                    <div className="space-y-6 p-8 bg-panel-glass border border-border-glass rounded-2xl">
+                       <div className="space-y-3">
+                          <div className="flex justify-between text-[10px] uppercase tracking-widest text-text-main/50 font-bold">
+                             <span>Inference_Latency</span>
+                             <span className="text-syntax-green">-85% Improvement</span>
+                          </div>
+                          <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden border border-border-glass">
+                             <div className="h-full bg-syntax-yellow w-[92%] shadow-[0_0_15px_rgba(255,203,107,0.3)]"></div>
+                          </div>
+                       </div>
+                       <div className="space-y-3">
+                          <div className="flex justify-between text-[10px] uppercase tracking-widest text-text-main/50 font-bold">
+                             <span>Throughput_Edge_Traversal</span>
+                             <span className="text-syntax-green">+12x Scale</span>
+                          </div>
+                          <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden border border-border-glass">
+                             <div className="h-full bg-syntax-blue w-[78%] shadow-[0_0_15px_rgba(130,170,255,0.3)]"></div>
+                          </div>
+                       </div>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex gap-6 pt-4">
-                  <a href="#" className="text-[10px] uppercase text-syntax-purple hover:underline underline-offset-4 font-bold tracking-widest">GitHub_Repository</a>
-                  <a href="#" className="text-[10px] uppercase text-syntax-blue hover:underline underline-offset-4 font-bold tracking-widest">Live_Manifest</a>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+                   <div className="md:col-span-2 space-y-6">
+                      <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-text-main/40">[ ENGINEERING_LOG ]</h4>
+                      <div className="prose prose-invert max-w-none">
+                         <p className="text-text-main/70 leading-relaxed italic text-base">
+                            "The primary bottleneck was the PCIe transfer overhead during massive parallel queries. By implementing a custom lock-free memory pool and utilizing <span className="text-syntax-purple">Unified Memory Architecture</span>, we successfully saturated the H100 memory bandwidth, bringing down query resolution from seconds to milliseconds."
+                         </p>
+                      </div>
+                   </div>
+                   <div className="space-y-6">
+                      <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-text-main/40">[ ACCESS_POINT ]</h4>
+                      <div className="flex flex-col gap-4">
+                         <a href="#" className="flex items-center justify-between p-4 bg-white/5 border border-border-glass rounded-lg hover:border-syntax-purple/50 group transition-all">
+                            <span className="text-[10px] font-mono font-bold uppercase tracking-widest">Source_Code</span>
+                            <span className="material-symbols-outlined text-[18px] text-syntax-purple">code</span>
+                         </a>
+                         <a href="#" className="flex items-center justify-between p-4 bg-white/5 border border-border-glass rounded-lg hover:border-syntax-blue/50 group transition-all">
+                            <span className="text-[10px] font-mono font-bold uppercase tracking-widest">Live_Manifest</span>
+                            <span className="material-symbols-outlined text-[18px] text-syntax-blue">open_in_new</span>
+                         </a>
+                      </div>
+                   </div>
                 </div>
               </div>
             )

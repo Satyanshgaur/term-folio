@@ -20,8 +20,15 @@ const EntranceScreen: React.FC<EntranceScreenProps> = ({ onEnter, isExiting }) =
             <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-syntax-blue/50">Core_Environment_Load</span>
             <span className="h-px w-12 bg-syntax-blue/20"></span>
           </div>
-          <h2 className="text-6xl font-bold text-text-main tracking-tighter uppercase">SATYANSH GAUR</h2>
-          <p className="font-mono text-xs text-text-main/40 tracking-[0.2em] uppercase">AI Infrastructure // Systems Programming // HPC</p>
+          <h2 className="text-7xl font-bold text-text-main tracking-tighter uppercase mb-4">SATYANSH GAUR</h2>
+          <div className="space-y-2 max-w-2xl mx-auto">
+            <p className="text-xl text-text-main/80 font-light leading-relaxed">
+              Building <span className="text-syntax-blue font-medium">hardware-aware software</span> for AI inference and distributed systems.
+            </p>
+            <p className="font-mono text-[10px] text-text-main/30 tracking-[0.3em] uppercase">
+              CUDA Kernels // GPU Architecture // Performance Engineering
+            </p>
+          </div>
         </div>
         
         <div className="flex flex-col md:flex-row gap-8 items-center justify-center mt-12">
