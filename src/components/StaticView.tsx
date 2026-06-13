@@ -1,36 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { projects } from '../data/projects';
+import { blogs } from '../data/blogs';
 
 const StaticView: React.FC = () => {
-  const projects = [
-    { 
-      id: 'graphrag', 
-      title: 'GraphRAG Engine', 
-      tag: 'C++ / CUDA', 
-      color: 'syntax-blue',
-      desc: 'High-performance knowledge graph reasoning system for LLMs. Optimized for massive parallel traversal.'
-    },
-    { 
-      id: 'satellite', 
-      title: 'Satellite Optimizer', 
-      tag: 'Rust / Wasm', 
-      color: 'syntax-green',
-      desc: 'Real-time link budget optimizer for LEO constellations. Low-latency performance engineering.'
-    },
-    { 
-      id: 'portfolio-os', 
-      title: 'Portfolio OS', 
-      tag: 'React / TS', 
-      color: 'syntax-purple',
-      desc: 'System-themed shell environment for showcasing AI infrastructure and systems programming projects.'
-    },
-  ];
-
-  const blogs = [
-    { id: 'hpc-kernels', title: 'Writing Custom HPC Kernels', date: 'FEB 2026' },
-    { id: 'cuda-perf', title: 'CUDA Memory Hierarchy Optimization', date: 'JAN 2026' },
-  ];
-
   return (
     <div className="max-w-6xl w-full mx-auto px-margin-desktop py-24 space-y-32 overflow-y-auto max-h-screen terminal-scroll pb-40">
       {/* Profile Section */}
@@ -64,7 +37,7 @@ const StaticView: React.FC = () => {
               Architecting <span className="text-syntax-blue font-medium">hardware-aware</span> software solutions for the next generation of AI scaling. 
             </p>
             <p className="text-text-main/50 text-base leading-relaxed max-w-2xl">
-              My methodology bridges the gap between high-level algorithmic reasoning and low-level hardware constraints. From optimizing CUDA thread occupancy to tuning Linux scheduler parameters, I build the infrastructure that makes AI inference possible at scale.
+              Building high-performance infrastructure for AI inference and distributed systems. Focused on CUDA kernels, GPU architecture, and low-level performance engineering.
             </p>
           </div>
           <div className="space-y-8 p-8 bg-panel-glass border border-border-glass rounded-2xl shadow-2xl relative overflow-hidden group">
@@ -79,7 +52,6 @@ const StaticView: React.FC = () => {
               <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 bg-syntax-purple rounded-full shadow-[0_0_8px_rgba(199,146,234,0.8)]"></span> CUDA / Triton Kernels</li>
               <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 bg-syntax-green rounded-full shadow-[0_0_8px_rgba(195,232,141,0.8)]"></span> LLM Inference Engines</li>
               <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 bg-syntax-yellow rounded-full shadow-[0_0_8_8px_rgba(255,203,107,0.8)]"></span> Linux Kernel Dev</li>
-              <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 bg-text-main/30 rounded-full"></span> Distributed Systems</li>
             </ul>
           </div>
         </div>
@@ -101,15 +73,15 @@ const StaticView: React.FC = () => {
                 <span className="material-symbols-outlined text-4xl">terminal</span>
               </div>
               <div className="relative z-10 space-y-6 flex-1 flex flex-col">
-                <span className={`font-mono text-[10px] uppercase tracking-[0.3em] ${project.color} font-bold opacity-60`}>
-                  // {project.tag}
+                <span className={`font-mono text-[10px] uppercase tracking-[0.3em] syntax-blue font-bold opacity-60`}>
+                  // {project.tags[0]}
                 </span>
                 <div>
                   <h3 className="text-2xl font-bold text-text-main uppercase tracking-tight group-hover:text-text-main transition-colors mb-3">
                     {project.title}
                   </h3>
                   <p className="text-text-main/40 text-sm leading-relaxed">
-                    {project.desc}
+                    {project.description}
                   </p>
                 </div>
                 <div className="mt-auto pt-8 flex items-center gap-3 text-[11px] font-mono uppercase tracking-[0.3em] text-syntax-blue opacity-40 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0 font-bold">
@@ -127,7 +99,6 @@ const StaticView: React.FC = () => {
            <h2 className="font-mono text-[11px] font-bold text-syntax-purple tracking-[0.4em] uppercase opacity-50 flex items-center gap-4">
              <span className="w-8 h-px bg-syntax-purple/30"></span> 04. RESEARCH_JOURNAL
            </h2>
-           <span className="font-mono text-[10px] text-text-main/20 uppercase tracking-[0.2em]">Updated Monthly</span>
         </div>
         <div className="space-y-2">
           {blogs.map((blog) => (

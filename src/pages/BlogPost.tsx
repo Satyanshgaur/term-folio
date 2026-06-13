@@ -1,52 +1,55 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { blogs } from '../data/blogs';
 
 const BlogPost: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+  const blog = blogs.find(b => b.id === id);
+
+  if (!blog) {
+    return (
+      <div className="pt-32 px-margin-desktop text-center font-mono">
+        <p className="text-syntax-purple mb-8 uppercase tracking-widest">[ 404_JOURNAL_NOT_FOUND ]</p>
+        <Link to="/" className="text-syntax-blue hover:underline uppercase text-xs">Return to Workspace</Link>
+      </div>
+    );
+  }
 
   return (
-    <div className="pt-32 px-margin-desktop max-w-4xl mx-auto pb-32 font-mono text-[#00ff41]">
-      <Link to="/" className="text-[#00ff41] hover:underline flex items-center gap-2 mb-12 uppercase text-xs tracking-widest">
+    <div className="pt-32 px-margin-desktop max-w-4xl mx-auto pb-40 font-mono text-text-main/90">
+      <Link to="/" className="text-syntax-blue hover:underline flex items-center gap-2 mb-16 uppercase text-[10px] tracking-[0.3em] font-bold">
         <span className="material-symbols-outlined text-[18px]">terminal</span>
         Exit Journal
       </Link>
       
-      <article className="space-y-12 animate-fade-in">
-        <div className="space-y-4">
-          <div className="flex items-center gap-4 text-[10px] opacity-50 uppercase tracking-[0.2em]">
-            <span>Journal_Entry</span>
-            <span className="h-px w-8 bg-[#00ff41]/30"></span>
-            <span>Ref: {id}</span>
+      <article className="space-y-16 animate-fade-in">
+        <div className="space-y-6 border-l-2 border-syntax-purple pl-8">
+          <div className="flex items-center gap-4 text-[10px] opacity-40 uppercase tracking-[0.4em] font-bold">
+            <span>Research_Entry</span>
+            <span className="h-px w-12 bg-border-glass"></span>
+            <span>Ref: {blog.id}</span>
           </div>
-          <h1 className="text-5xl font-bold text-white uppercase tracking-tighter leading-tight crt-glow">
-            {id?.replace(/-/g, ' ')}
-          </h1>
-          <div className="flex gap-8 text-[10px] uppercase tracking-widest opacity-60">
-            <span>Published: Feb 2026</span>
-            <span>Topic: Performance Engineering</span>
+          <h1 className="text-6xl font-bold text-text-main uppercase tracking-tighter leading-tight">{blog.title}</h1>
+          <div className="flex gap-8 text-[11px] uppercase tracking-[0.2em] font-bold">
+            <span className="text-syntax-purple">{blog.date}</span>
+            <span className="text-text-main/30">//</span>
+            <span className="text-syntax-blue">Topic: {blog.topic}</span>
           </div>
         </div>
 
-        <div className="h-px bg-[#00ff41]/20 w-full"></div>
+        <div className="h-px bg-border-glass w-full"></div>
 
-        <div className="prose prose-invert max-w-none space-y-8">
-          <p className="text-xl text-white font-light leading-relaxed">
-            In systems programming, we often treat the hardware as an abstract entity. However, at extreme scales, the physical reality of the machine—its cache hierarchy, PCIe lanes, and memory controllers—dictates the software architecture.
-          </p>
-          
-          <div className="space-y-4">
-            <h2 className="text-xl font-bold text-white uppercase tracking-widest">[ The Memory Bottleneck ]</h2>
-            <p className="text-[#00ff41]/80 leading-relaxed">
-              When working with high-throughput inference engines, the primary enemy is latency. Shared memory on GPUs is a powerful tool, but misuse can lead to bank conflicts that throttle performance. Understanding how to align memory access patterns with hardware architecture is critical.
-            </p>
-          </div>
-
-          <div className="p-6 bg-[#00ff41]/5 border border-[#00ff41]/20 rounded font-mono text-sm">
-            <p className="opacity-50 mb-2">// Sample CUDA Kernel Optimization</p>
-            <code className="text-white">
-              __shared__ float tile[TILE_SIZE][TILE_SIZE + 1]; <span className="text-[#00ff41]/50">// Padding to avoid bank conflicts</span>
-            </code>
-          </div>
+        <div className="prose prose-invert max-w-none space-y-8 text-lg leading-relaxed text-text-main/70">
+           {blog.content.split('\n').map((line, i) => {
+             const trimmed = line.trim();
+             if (trimmed.startsWith('##')) {
+               return <h2 key={i} className="text-2xl font-bold text-text-main uppercase tracking-widest mt-12 mb-6 border-b border-white/5 pb-2">{trimmed.replace('##', '').trim()}</h2>;
+             }
+             if (trimmed.length > 0) {
+               return <p key={i} className="mb-6">{trimmed}</p>;
+             }
+             return null;
+           })}
         </div>
       </article>
     </div>

@@ -1,4 +1,6 @@
 import React, { useState, useCallback } from 'react';
+import { projects } from '../data/projects';
+import { blogs } from '../data/blogs';
 
 export interface TerminalLine {
   type: 'input' | 'output' | 'error' | 'info';
@@ -15,7 +17,7 @@ export const useTerminal = (onOpenModal: () => void) => {
           <p className="text-text-main/60 italic">Type <span className="text-syntax-purple">'help'</span> to see available commands.</p>
           <div className="p-3 bg-white/5 border border-border-glass rounded max-w-fit">
             <p className="text-syntax-yellow text-xs font-bold uppercase tracking-widest">Featured_Release:</p>
-            <p className="text-syntax-green text-sm">GraphRAG Engine // Optimized CUDA kernels for parallel traversal</p>
+            <p className="text-syntax-green text-sm">Satellite Link Optimizer // High-fidelity physics engine (Numba-accelerated)</p>
           </div>
         </div>
       ) 
@@ -53,6 +55,7 @@ export const useTerminal = (onOpenModal: () => void) => {
               <div><span className="syntax-purple font-medium">clear</span> <span className="opacity-40">- Clear buffer</span></div>
               <div><span className="syntax-purple font-medium">blogs</span> <span className="opacity-40">- Writeups</span></div>
               <div><span className="syntax-purple font-medium">project [id]</span> <span className="opacity-40">- System specs</span></div>
+              <div><span className="syntax-purple font-medium">blog [id]</span> <span className="opacity-40">- Read journal</span></div>
             </div>
           )
         });
@@ -126,38 +129,16 @@ export const useTerminal = (onOpenModal: () => void) => {
           type: 'output',
           content: (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8 max-w-5xl">
-              {[
-                {
-                  id: 'graphrag',
-                  title: 'GraphRAG Engine',
-                  desc: 'High-performance knowledge graph reasoning system for LLMs.',
-                  metric: '4.2M Edges/sec',
-                  metricLabel: 'Throughput',
-                  tags: ['C++', 'CUDA', 'Python'],
-                  icon: 'schema'
-                },
-                {
-                  id: 'satellite',
-                  title: 'Satellite Optimizer',
-                  desc: 'Real-time link budget optimizer for LEO constellations.',
-                  metric: '~12ms Latency',
-                  metricLabel: 'P99_Response',
-                  tags: ['Rust', 'Vulkan', 'Wasm'],
-                  icon: 'settings_input_antenna'
-                }
-              ].map(p => (
+              {projects.map(p => (
                 <div key={p.id} className="p-8 rounded-2xl border border-border-glass bg-white/5 backdrop-blur-sm group hover:border-syntax-blue/30 transition-all flex flex-col gap-6 shadow-2xl relative overflow-hidden">
-                  <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-20 transition-opacity">
-                    <span className="material-symbols-outlined text-7xl">{p.icon}</span>
-                  </div>
                   <div className="flex justify-between items-start relative z-10">
                     <h3 className="text-3xl font-bold text-text-main uppercase tracking-tighter">{p.title}</h3>
                     <div className="text-right">
-                      <span className="block text-[9px] uppercase tracking-widest text-text-main/40 mb-1">{p.metricLabel}</span>
-                      <span className="text-syntax-yellow font-bold text-sm tracking-tight">{p.metric}</span>
+                      <span className="block text-[9px] uppercase tracking-widest text-text-main/40 mb-1">{p.metrics[0].label}</span>
+                      <span className="text-syntax-yellow font-bold text-sm tracking-tight">{p.metrics[0].value}</span>
                     </div>
                   </div>
-                  <p className="text-text-main/50 text-base leading-relaxed max-w-sm relative z-10">{p.desc}</p>
+                  <p className="text-text-main/50 text-base leading-relaxed max-w-sm relative z-10">{p.description}</p>
                   <div className="mt-auto pt-6 border-t border-border-glass/30 flex items-center justify-between relative z-10">
                     <div className="flex gap-3">
                       {p.tags.map(t => (
@@ -182,67 +163,47 @@ export const useTerminal = (onOpenModal: () => void) => {
 
       case 'project':
         const projectId = args[1];
-        if (!projectId) {
-          addLine({ type: 'error', content: 'Usage: project [id]. Available: graphrag, satellite, portfolio-os' });
+        const project = projects.find(p => p.id === projectId);
+        if (!projectId || !project) {
+          addLine({ type: 'error', content: `Usage: project [id]. Available IDs: ${projects.map(p => p.id).join(', ')}` });
         } else {
           addLine({
             type: 'output',
             content: (
               <div className="mt-12 space-y-12 max-w-5xl animate-fade-in pb-20">
                 <div className="space-y-4 border-l-2 border-syntax-blue pl-8">
-                  <span className="text-[10px] uppercase tracking-[0.4em] text-text-main/30 font-bold">System_Artifact // {projectId}</span>
-                  <h2 className="text-5xl font-bold text-text-main uppercase tracking-tighter">{projectId.replace('-', ' ')}</h2>
-                  <div className="flex gap-6 pt-2">
-                    <div className="flex flex-col">
-                      <span className="text-[9px] uppercase tracking-widest text-text-main/40">Status</span>
-                      <span className="text-syntax-green font-bold text-xs uppercase tracking-widest">Optimized_Stable</span>
-                    </div>
-                    <div className="flex flex-col">
-                      <span className="text-[9px] uppercase tracking-widest text-text-main/40">Build</span>
-                      <span className="text-text-main font-bold text-xs uppercase tracking-widest">v2.4.0-release</span>
-                    </div>
-                  </div>
+                  <span className="text-[10px] uppercase tracking-[0.4em] text-text-main/30 font-bold">System_Artifact // {project.id}</span>
+                  <h2 className="text-5xl font-bold text-text-main uppercase tracking-tighter">{project.title}</h2>
+                  <p className="text-xl text-text-main/60 font-light">{project.subtitle}</p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                  {/* Architecture Visualization */}
-                  <div className="space-y-6">
-                    <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-syntax-blue opacity-60 flex items-center gap-2">
-                      <span className="w-4 h-px bg-syntax-blue/30"></span> ARCHITECTURE
-                    </h4>
-                    <div className="aspect-video bg-white/5 border border-border-glass rounded-2xl flex flex-col items-center justify-center p-8 group hover:bg-white/10 transition-colors relative overflow-hidden">
-                       <div className="absolute inset-0 grid grid-cols-6 grid-rows-6 opacity-[0.03] pointer-events-none">
-                          {[...Array(36)].map((_, i) => <div key={i} className="border border-text-main"></div>)}
-                       </div>
-                       <span className="material-symbols-outlined text-7xl text-text-main/10 group-hover:text-syntax-blue/20 transition-all scale-110">hub</span>
-                       <p className="mt-4 text-[10px] uppercase tracking-widest text-text-main/40 font-mono">[ Parallel Graph Traversal Subsystem ]</p>
-                    </div>
+                  <div className="space-y-8">
+                    <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-syntax-blue opacity-60">FEATURES</h4>
+                    <ul className="space-y-4 font-mono text-sm text-text-main/80">
+                      {project.features.map((f, i) => (
+                        <li key={i} className="flex gap-4">
+                          <span className="text-syntax-purple">0{i+1}.</span>
+                          <span>{f}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
 
-                  {/* Performance Benchmarks */}
-                  <div className="space-y-6">
-                    <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-syntax-yellow opacity-60 flex items-center gap-2">
-                      <span className="w-4 h-px bg-syntax-yellow/30"></span> PERFORMANCE_BENCHMARKS
-                    </h4>
+                  <div className="space-y-8">
+                    <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-syntax-yellow opacity-60">PERFORMANCE_BENCHMARKS</h4>
                     <div className="space-y-6 p-8 bg-panel-glass border border-border-glass rounded-2xl">
-                       <div className="space-y-3">
-                          <div className="flex justify-between text-[10px] uppercase tracking-widest text-text-main/50 font-bold">
-                             <span>Inference_Latency</span>
-                             <span className="text-syntax-green">-85% Improvement</span>
-                          </div>
-                          <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden border border-border-glass">
-                             <div className="h-full bg-syntax-yellow w-[92%] shadow-[0_0_15px_rgba(255,203,107,0.3)]"></div>
-                          </div>
-                       </div>
-                       <div className="space-y-3">
-                          <div className="flex justify-between text-[10px] uppercase tracking-widest text-text-main/50 font-bold">
-                             <span>Throughput_Edge_Traversal</span>
-                             <span className="text-syntax-green">+12x Scale</span>
-                          </div>
-                          <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden border border-border-glass">
-                             <div className="h-full bg-syntax-blue w-[78%] shadow-[0_0_15px_rgba(130,170,255,0.3)]"></div>
-                          </div>
-                       </div>
+                       {project.metrics.map((m, i) => (
+                         <div key={i} className="space-y-3">
+                            <div className="flex justify-between text-[10px] uppercase tracking-widest text-text-main/50 font-bold">
+                               <span>{m.label}</span>
+                               <span className="text-syntax-green">{m.value}</span>
+                            </div>
+                            <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden border border-border-glass">
+                               <div className={`h-full ${i % 2 === 0 ? 'bg-syntax-yellow' : 'bg-syntax-blue'} w-[85%] shadow-[0_0_15px_rgba(130,170,255,0.3)]`}></div>
+                            </div>
+                         </div>
+                       ))}
                     </div>
                   </div>
                 </div>
@@ -252,20 +213,16 @@ export const useTerminal = (onOpenModal: () => void) => {
                       <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-text-main/40">[ ENGINEERING_LOG ]</h4>
                       <div className="prose prose-invert max-w-none">
                          <p className="text-text-main/70 leading-relaxed italic text-base">
-                            "The primary bottleneck was the PCIe transfer overhead during massive parallel queries. By implementing a custom lock-free memory pool and utilizing <span className="text-syntax-purple">Unified Memory Architecture</span>, we successfully saturated the H100 memory bandwidth, bringing down query resolution from seconds to milliseconds."
+                            "{project.engineeringLog}"
                          </p>
                       </div>
                    </div>
                    <div className="space-y-6">
                       <h4 className="text-[10px] uppercase tracking-[0.3em] font-bold text-text-main/40">[ ACCESS_POINT ]</h4>
                       <div className="flex flex-col gap-4">
-                         <a href="#" className="flex items-center justify-between p-4 bg-white/5 border border-border-glass rounded-lg hover:border-syntax-purple/50 group transition-all">
-                            <span className="text-[10px] font-mono font-bold uppercase tracking-widest">Source_Code</span>
+                         <a href={project.githubUrl || "#"} className="flex items-center justify-between p-4 bg-white/5 border border-border-glass rounded-lg hover:border-syntax-purple/50 group transition-all text-sm font-mono uppercase tracking-widest">
+                            Source_Code
                             <span className="material-symbols-outlined text-[18px] text-syntax-purple">code</span>
-                         </a>
-                         <a href="#" className="flex items-center justify-between p-4 bg-white/5 border border-border-glass rounded-lg hover:border-syntax-blue/50 group transition-all">
-                            <span className="text-[10px] font-mono font-bold uppercase tracking-widest">Live_Manifest</span>
-                            <span className="material-symbols-outlined text-[18px] text-syntax-blue">open_in_new</span>
                          </a>
                       </div>
                    </div>
@@ -281,10 +238,7 @@ export const useTerminal = (onOpenModal: () => void) => {
           type: 'output',
           content: (
             <div className="space-y-4 mt-4 max-w-2xl">
-              {[
-                { id: 'hpc-kernels', title: 'Writing Custom HPC Kernels', date: 'FEB 2026' },
-                { id: 'cuda-perf', title: 'CUDA Memory Hierarchy Optimization', date: 'JAN 2026' }
-              ].map(b => (
+              {blogs.map(b => (
                 <div key={b.id} className="flex items-center justify-between group cursor-pointer p-2 hover:bg-white/5 rounded border border-transparent hover:border-border-glass transition-all" onClick={() => executeCommand(`blog ${b.id}`)}>
                   <div className="flex items-center gap-12">
                     <span className="text-[10px] text-syntax-comment opacity-70 tracking-widest">{b.date}</span>
@@ -300,26 +254,27 @@ export const useTerminal = (onOpenModal: () => void) => {
 
       case 'blog':
         const blogId = args[1];
-        if (!blogId) {
-          addLine({ type: 'error', content: 'Usage: blog [id]. Type "blogs" to list.' });
+        const blog = blogs.find(b => b.id === blogId);
+        if (!blogId || !blog) {
+          addLine({ type: 'error', content: `Usage: blog [id]. Available IDs: ${blogs.map(b => b.id).join(', ')}` });
         } else {
           addLine({
             type: 'output',
             content: (
-              <div className="mt-8 max-w-2xl p-6 bg-white/5 rounded border border-border-glass backdrop-blur-md">
-                <div className="mb-8">
-                  <span className="text-[10px] uppercase tracking-[0.3em] text-syntax-purple font-bold">Research_Journal // {blogId}</span>
-                  <h2 className="text-3xl font-bold text-text-main uppercase mt-2 tracking-tighter">{blogId.replace(/-/g, ' ')}</h2>
+              <div className="mt-8 max-w-3xl p-8 bg-white/5 rounded-2xl border border-border-glass backdrop-blur-md">
+                <div className="mb-12 border-b border-border-glass pb-8">
+                  <span className="text-[10px] uppercase tracking-[0.3em] text-syntax-purple font-bold">Research_Journal // {blog.id}</span>
+                  <h2 className="text-5xl font-bold text-text-main uppercase mt-4 tracking-tighter leading-tight">{blog.title}</h2>
+                  <div className="flex gap-8 mt-6 text-[10px] uppercase tracking-[0.2em] opacity-40">
+                     <span>{blog.date}</span>
+                     <span>Topic: {blog.topic}</span>
+                  </div>
                 </div>
-                <p className="text-text-main/70 leading-relaxed mb-6 text-sm">
-                  Performance engineering is about understanding the hardware constraints. In this deep dive, we explore how shared memory banking affects throughput in massive parallel architectures...
-                </p>
-                <div className="p-4 bg-syntax-blue/5 border-l-2 border-syntax-blue italic mb-6 text-xs text-text-main/60">
-                  "The hardware is the limit, the software is the vision."
+                <div className="prose prose-invert max-w-none prose-sm leading-relaxed text-text-main/70">
+                   {blog.content.split('\n').map((line, i) => (
+                     <p key={i} className="mb-4">{line.trim()}</p>
+                   ))}
                 </div>
-                <p className="text-syntax-comment text-xs">
-                  [ Markdown_Engine: Connecting to local buffer... ]
-                </p>
               </div>
             )
           });
@@ -340,10 +295,6 @@ export const useTerminal = (onOpenModal: () => void) => {
                 <div className="flex items-center gap-4">
                   <span className="text-syntax-blue uppercase tracking-[0.2em] text-[10px] font-bold w-20">X/Twitter</span>
                   <span className="text-text-main/80">@satyansh_gaur</span>
-                </div>
-                <div className="flex items-center gap-4">
-                  <span className="text-syntax-green uppercase tracking-[0.2em] text-[10px] font-bold w-20">SSH</span>
-                  <span className="text-text-main/80">dev.gaur.sh:2222</span>
                 </div>
               </div>
             </div>
