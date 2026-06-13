@@ -90,5 +90,145 @@ export const projects: ProjectData[] = [
       ## Knowledge Extraction Pipeline
       Documents are chunked and passed to a local LLM to extract entities, relationships, and metadata with confidence scoring and source tracking.
     `
+  },
+  {
+    id: 'orbit-ops',
+    title: 'Orbit Ops',
+    subtitle: 'Hyperlocal Air Quality Forecasting Platform',
+    description: 'Predicts neighborhood-level air pollution using satellite observations, ground sensors, and weather data.',
+    tags: ['FastAPI', 'TimescaleDB', 'PostGIS', 'Next.js'],
+    metrics: [
+      { label: 'Downscaling', value: '10km -> Street', description: 'Hyperlocal prediction grid' },
+      { label: 'API_Latency', value: '~45ms', description: 'FastAPI async performance' },
+      { label: 'Precision', value: '92%', description: 'Prediction accuracy vs ground truth' }
+    ],
+    stack: ['FastAPI', 'Docker', 'TimescaleDB', 'PostGIS', 'xarray + dask', 'Next.js', 'Mapbox'],
+    features: [
+      'Hyperlocal Forecasting: Street-level predictions using ML downscaling.',
+      'Explainable Predictions: Shows pollution drivers (traffic, weather, industry).',
+      'Interactive Map: Visualization of local risk levels via Mapbox.',
+      'Personalized Alerts: Threshold-based notifications for pined locations.'
+    ],
+    challenges: [
+      'Fusing heterogeneous data sources (NASA TEMPO, EPA, NOAA).',
+      'Scaling time-series data processing with dask for street-level resolution.',
+      'Implementing low-latency spatial queries in PostGIS.'
+    ],
+    engineeringLog: 'Orbit Ops solves the "citywide average" problem in AQI reporting. By fusing NASA satellite data with ground stations and weather models, we provide actionable, hyperlocal insights for daily activity planning.',
+    fullWriteup: `
+      ## The Data Fusion Problem
+      Pollution can differ street-to-street, but citywide AQI averages often mislead users. Orbit Ops fuses NASA TEMPO satellite observations with local ground sensors to create a high-resolution pollution map.
+
+      ## Scalable Infrastructure
+      Built on FastAPI and TimescaleDB, the platform handles massive environmental datasets using xarray and dask for parallelized preprocessing.
+
+      ## Explainable ML
+      Instead of just showing a number, our model predicts *why* spikes occur — whether it's a specific traffic corridor during rush hour or low wind speed trapping emissions.
+    `
+  },
+  {
+    id: 'sahai-ai',
+    title: 'Sahai AI',
+    subtitle: 'AI-Powered Mental Health & Lifestyle Ecosystem',
+    description: 'An AI-driven resilience platform for college students, integrating personalized AI therapy, lifestyle tracking, and peer communities.',
+    tags: ['LLMs', 'RAG', 'Django', 'React'],
+    metrics: [
+      { label: 'RAG_Accuracy', value: '94.2%', description: 'Evidence-based response score' },
+      { label: 'Concurrency', value: 'Redis-Cached', description: 'High-performance chat sessions' },
+      { label: 'Deployment', value: 'Docker', description: 'Containerized microservices' }
+    ],
+    stack: ['FastAPI', 'Django', 'PostgreSQL', 'Redis', 'FAISS', 'React', 'Tailwind'],
+    features: [
+      'AI Chatbot (Fine-tuned + RAG): Context-aware, safe responses using FAISS semantic search.',
+      'Lifestyle Tracking: Mood trackers and clinical assessments (PHQ-9).',
+      'Community Layer: Moderated support forums and college-specific circles.',
+      'Crisis Escalation: Automated routing for at-risk cases to licensed counselors.'
+    ],
+    challenges: [
+      'Efficient fine-tuning using LoRA for empathetic, ethical student-facing tone.',
+      'Integrating evidence-based clinical docs via semantic vector search.',
+      'Managing real-time interactions using WebSockets at scale.'
+    ],
+    engineeringLog: 'Sahai treats mental health as a lifestyle issue. By blending AI support with real-world community meetups and lifestyle tracking, we build a supportive ecosystem where student well-being is integrated into daily life.',
+    fullWriteup: `
+      ## Beyond the Chatbot
+      Sahai is an integrated ecosystem. It combines an empathetic AI layer with lifestyle tracking (moods, habits) and a community layer for real-world support.
+
+      ## Technical AI Layer
+      Utilizing a RAG pipeline with FAISS, Sahai ensures that every piece of advice is grounded in curated, evidence-based mental health documentation.
+
+      ## Enterprise-Ready Backend
+      A hybrid FastAPI/Django architecture ensures secure authentication while providing high-throughput chat endpoints cached with Redis.
+    `
+  },
+  {
+    id: 'plant-scout',
+    title: 'Plant Scout',
+    subtitle: 'Autonomous Field Scout & Classifier',
+    description: 'End-to-end ML and robotics project for early plant disease detection using computer vision and autonomous navigation.',
+    tags: ['PyTorch', 'ResNet9', 'CV', 'Robotics'],
+    metrics: [
+      { label: 'Arch', value: 'ResNet9', description: 'Optimized residual network' },
+      { label: 'Speed', value: 'Real-Time', description: 'Edge-ready inference latency' },
+      { label: 'Validation', value: 'Leaf-ID Aware', description: 'Leakage-free dataset splitting' }
+    ],
+    stack: ['PyTorch', 'ResNet9', 'Jetson Nano', 'OpenCV', 'One Cycle Policy'],
+    features: [
+      'ResNet9 Architecture: High-speed residual network for image classification.',
+      'Leakage-Free Splitting: Advanced data prep grouping photos by physical leaf.',
+      'Mixed Precision Training: Speeding up convergence with torch.amp.',
+      'Edge-Ready Inference: Designed for Jetson Nano/Raspberry Pi deployment.'
+    ],
+    challenges: [
+      'Preventing data leakage by ensuring multiple photos of the same leaf stay in the same split.',
+      'Optimizing model size for real-time classification on embedded hardware.',
+      'Managing gradient stability with clipping and weight decay during training.'
+    ],
+    engineeringLog: 'Plant Scout bridges the gap between precision agriculture and autonomous systems. By training on leakage-free datasets, we ensure our ResNet9 model generalizes to unseen field conditions effectively.',
+    fullWriteup: `
+      ## Precision Agriculture
+      Early detection of leaf diseases can save entire harvests. Plant Scout identifies disease categories from live camera input with high confidence.
+
+      ## Robust Machine Learning
+      Unlike standard random splits, we use Leaf-ID aware grouping to ensure the model is tested on *unseen leaves*, providing a true measure of real-world performance.
+
+      ## Robotics Integration
+      The project is optimized for deployment on small-scale wheeled robots (using Jetson Nano), enabling autonomous field scanning and real-time reporting.
+    `
+  },
+  {
+    id: 'task-server',
+    title: 'Task Server',
+    subtitle: 'Multithreaded TCP Task Processor',
+    description: 'A high-concurrency TCP server written in Java for processing computational tasks across dedicated worker pools.',
+    tags: ['Java', 'TCP/IP', 'Concurrency', 'Networking'],
+    metrics: [
+      { label: 'Concurrency', value: 'Thread-Pool', description: 'Configurable worker management' },
+      { label: 'Latency', value: 'Sub-ms', description: 'Raw socket overhead' },
+      { label: 'Safety', value: 'Lock-Guarded', description: 'Thread-safe task routing' }
+    ],
+    stack: ['Java 11+', 'TCP Sockets', 'Concurrency API', 'Thread Pools'],
+    features: [
+      'Concurrent Sessions: Dedicated threads for each connected client.',
+      'Worker Pool: Efficiently drains a shared thread-safe task queue.',
+      'Supported Tasks: SORT (lists), FACTORIAL (compute), REVERSE (strings).',
+      'Graceful Handling: Robust error management for malformed commands.'
+    ],
+    challenges: [
+      'Ensuring strict thread safety across the shared task queue.',
+      'Eliminating cross-session data contamination through isolated result routing.',
+      'Managing graceful resource cleanup during abrupt client disconnections.'
+    ],
+    engineeringLog: 'The Task Server is a deep dive into concurrent systems design. It prioritizes the core mechanics of raw socket communication and thread-safe task orchestration over high-level abstractions.',
+    fullWriteup: `
+      ## Concurrent Architecture
+      The implementation utilizes a configurable pool of worker threads that process tasks submitted over raw TCP/IP sockets. This ensures high-throughput task execution without blocking client connections.
+
+      ## Thread Safety
+      Every access to the central task queue is guarded by Java synchronization primitives, ensuring system integrity even under heavy concurrent load.
+
+      ## Bare-Metal Networking
+      By working directly with Java Sockets and plain text protocols, the project demonstrates a clear understanding of low-level network communication and result routing.
+    `
   }
 ];
