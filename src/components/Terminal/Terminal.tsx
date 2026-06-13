@@ -3,9 +3,7 @@ import { useTerminal } from '../../hooks/useTerminal';
 import TerminalHistory from './TerminalHistory';
 import TerminalInput from './TerminalInput';
 
-interface TerminalProps {}
-
-const Terminal: React.FC<TerminalProps> = () => {
+const Terminal: React.FC = () => {
   const { history, executeCommand } = useTerminal();
   const scrollRef = useRef<HTMLDivElement>(null);
 

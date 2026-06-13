@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Home from './pages/Home';
 import ProjectDetail from './pages/ProjectDetail';
 import BlogPost from './pages/BlogPost';
@@ -9,14 +9,11 @@ import CustomCursor from './components/layout/CustomCursor';
 
 function AppContent() {
   const location = useLocation();
-  const [hasEntered, setHasEntered] = useState(() => location.pathname !== '/');
+  const [internalHasEntered, setInternalHasEntered] = useState(false);
   const [isTerminalMode, setIsTerminalMode] = useState(true);
 
-  useEffect(() => {
-    if (location.pathname !== '/') {
-      setHasEntered(true);
-    }
-  }, [location.pathname]);
+  // Derive hasEntered: either they clicked the button OR they are on a deep link
+  const hasEntered = internalHasEntered || location.pathname !== '/';
 
   return (
     <div className="min-h-screen bg-bg-deep text-text-main selection:bg-syntax-blue/30 font-mono relative overflow-hidden">
@@ -39,7 +36,7 @@ function AppContent() {
             path="/" 
             element={
               <Home 
-                onEnter={() => setHasEntered(true)} 
+                onEnter={() => setInternalHasEntered(true)} 
                 hasEntered={hasEntered} 
                 isTerminalMode={isTerminalMode}
                 onToggleTerminal={(val) => setIsTerminalMode(val)}
