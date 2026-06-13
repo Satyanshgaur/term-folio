@@ -4,31 +4,31 @@ const Footer: React.FC = () => {
   return (
     <footer 
       id="global-footer"
-      className="w-full flex justify-between items-center px-margin-desktop py-4 border-t border-[#00ff41]/10 bg-black/60 backdrop-blur-md font-mono text-[10px]"
+      className="w-full h-12 flex justify-between items-center px-margin-desktop bg-surface-glass backdrop-blur-xl border-t border-border-glass font-mono text-[10px]"
     >
-      <div className="text-[#00ff41]/50 tracking-widest uppercase">
-        [ PROCESS_STATUS: STABLE ] © {new Date().getFullYear()} SATYANSH GAUR
+      <div className="text-text-main/30 tracking-[0.2em] uppercase">
+        [ SYSTEM_STATUS: NOMINAL ] // © {new Date().getFullYear()} SATYANSH GAUR
       </div>
       <div className="flex gap-8">
         <a 
           href="https://github.com/satyansh-gaur" 
           target="_blank" 
           rel="noopener noreferrer"
-          className="text-[#00ff41]/50 hover:text-[#00ff41] transition-colors uppercase"
+          className="text-text-main/40 hover:text-syntax-blue transition-colors uppercase tracking-widest"
         >
-          // GitHub
+          GitHub
         </a>
         <a 
           href="#" 
-          className="text-[#00ff41]/50 hover:text-[#00ff41] transition-colors uppercase"
+          className="text-text-main/40 hover:text-syntax-purple transition-colors uppercase tracking-widest"
         >
-          // LinkedIn
+          LinkedIn
         </a>
         <a 
           href="#" 
-          className="text-[#00ff41]/50 hover:text-[#00ff41] transition-colors uppercase"
+          className="text-text-main/40 hover:text-syntax-green transition-colors uppercase tracking-widest"
         >
-          // X_Twitter
+          X_Twitter
         </a>
       </div>
     </footer>
