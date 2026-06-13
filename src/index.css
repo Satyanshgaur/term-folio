@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  background-color: #111827;
+  color: #cdd6f4;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  user-select: none;
+  background: radial-gradient(circle at top right, #1e293b, #111827);
+}
+
+/* Premium Glassmorphism */
+.glass-terminal {
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    0 0 40px rgba(59, 130, 246, 0.1),
+    0 0 80px rgba(59, 130, 246, 0.05);
+}
+
+.glass-panel {
+  background: rgba(30, 41, 59, 0.4);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Window Chrome - Traffic Lights */
+.traffic-light-red { background-color: #ff5f57; }
+.traffic-light-yellow { background-color: #febc2e; }
+.traffic-light-green { background-color: #28c840; }
+
+/* Blinking Cursor - Soft */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.cursor-soft {
+  display: inline-block;
+  width: 8px;
+  height: 18px;
+  background-color: #82aaff;
+  margin-left: 4px;
+  animation: blink 1.2s infinite ease-in-out;
+  vertical-align: middle;
+  box-shadow: 0 0 8px rgba(130, 170, 255, 0.5);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.4s forwards cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Scrollbar - Minimal */
+.terminal-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+
+.terminal-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.terminal-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Typography Overrides */
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: -0.01em;
+}
+
+/* Syntax Highlighting Utilities */
+.syntax-purple { color: #c792ea; }
+.syntax-blue { color: #82aaff; }
+.syntax-green { color: #c3e88d; }
+.syntax-yellow { color: #ffcb6b; }
+.syntax-comment { color: #637777; font-style: italic; }
