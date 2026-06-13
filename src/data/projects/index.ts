@@ -44,6 +44,8 @@ export const projects: ProjectData[] = [
       'Implementing state-aware handoffs with built-in hysteresis and dwell-time constraints.',
       'Optimizing memory utilization for 500k+ simulation steps.'
     ],
+    githubUrl: 'https://github.com/Satyanshgaur/Satellite-link-optimiser',
+    demoUrl: 'https://github.com/Satyanshgaur/Satellite-link-optimiser',
     engineeringLog: 'The simulation engine combines NumPy vectorization and Numba JIT compilation to support large-scale availability studies. We successfully brought SGP4 latency down to 75µs, enabling real-time handoff visualization for 1,300+ satellite databases.',
     fullWriteup: `
       ## High-Fidelity Physics Engine
@@ -79,6 +81,8 @@ export const projects: ProjectData[] = [
       'Managing confidence accumulation across independent document sources.',
       'Optimizing graph traversal for multi-hop reasoning on consumer hardware.'
     ],
+    githubUrl: 'https://github.com/Satyanshgaur/RecalNet',
+    demoUrl: 'https://github.com/Satyanshgaur/RecalNet',
     engineeringLog: 'GraphMem is an experiment in building persistent machine memory. By moving beyond isolated context windows to a structured graph layer, we enable AI agents to maintain an evolving understanding of information locally.',
     fullWriteup: `
       ## The Motivation
@@ -114,6 +118,8 @@ export const projects: ProjectData[] = [
       'Scaling time-series data processing with dask for street-level resolution.',
       'Implementing low-latency spatial queries in PostGIS.'
     ],
+    githubUrl: 'https://github.com/Satyanshgaur/orbit-ops',
+    demoUrl: 'https://github.com/Satyanshgaur/orbit-ops',
     engineeringLog: 'Orbit Ops solves the "citywide average" problem in AQI reporting. By fusing NASA satellite data with ground stations and weather models, we provide actionable, hyperlocal insights for daily activity planning.',
     fullWriteup: `
       ## The Data Fusion Problem
@@ -149,6 +155,8 @@ export const projects: ProjectData[] = [
       'Integrating evidence-based clinical docs via semantic vector search.',
       'Managing real-time interactions using WebSockets at scale.'
     ],
+    githubUrl: 'https://github.com/Vaibhav20k/Sahai_Project',
+    demoUrl: 'https://github.com/Vaibhav20k/Sahai_Project',
     engineeringLog: 'Sahai treats mental health as a lifestyle issue. By blending AI support with real-world community meetups and lifestyle tracking, we build a supportive ecosystem where student well-being is integrated into daily life.',
     fullWriteup: `
       ## Beyond the Chatbot
@@ -184,6 +192,8 @@ export const projects: ProjectData[] = [
       'Optimizing model size for real-time classification on embedded hardware.',
       'Managing gradient stability with clipping and weight decay during training.'
     ],
+    githubUrl: 'https://github.com/Satyanshgaur/plant_disease_classification',
+    demoUrl: 'https://github.com/Satyanshgaur/plant_disease_classification',
     engineeringLog: 'Plant Scout bridges the gap between precision agriculture and autonomous systems. By training on leakage-free datasets, we ensure our ResNet9 model generalizes to unseen field conditions effectively.',
     fullWriteup: `
       ## Precision Agriculture
@@ -219,6 +229,8 @@ export const projects: ProjectData[] = [
       'Eliminating cross-session data contamination through isolated result routing.',
       'Managing graceful resource cleanup during abrupt client disconnections.'
     ],
+    githubUrl: 'https://github.com/Satyanshgaur/task-server-in-java',
+    demoUrl: 'https://github.com/Satyanshgaur/task-server-in-java',
     engineeringLog: 'The Task Server is a deep dive into concurrent systems design. It prioritizes the core mechanics of raw socket communication and thread-safe task orchestration over high-level abstractions.',
     fullWriteup: `
       ## Concurrent Architecture

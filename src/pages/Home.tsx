@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import EntranceScreen from '../components/EntranceScreen';
 import Terminal from '../components/Terminal/Terminal';
-import ProjectsModal from '../components/ProjectsModal';
 import StaticView from '../components/StaticView';
 import WorkstationSidebar from '../components/layout/WorkstationSidebar';
 
@@ -14,7 +13,6 @@ interface HomeProps {
 
 const Home: React.FC<HomeProps> = ({ onEnter, hasEntered, isTerminalMode, onToggleTerminal }) => {
   const [isExiting, setIsExiting] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleEnter = (isTerminal: boolean) => {
     setIsExiting(true);
@@ -35,7 +33,7 @@ const Home: React.FC<HomeProps> = ({ onEnter, hasEntered, isTerminalMode, onTogg
           <div className="flex-1 min-w-0 h-full relative">
             {isTerminalMode ? (
               <div className="h-full w-full animate-fade-in pt-16">
-                <Terminal onOpenModal={() => setIsModalOpen(true)} />
+                <Terminal />
               </div>
             ) : (
               <div className="h-full w-full pt-16 overflow-hidden">
@@ -43,18 +41,15 @@ const Home: React.FC<HomeProps> = ({ onEnter, hasEntered, isTerminalMode, onTogg
               </div>
             )}
           </div>
-          
+
           <div className={`transition-all duration-1000 transform ${hasEntered ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}`}>
             <WorkstationSidebar />
           </div>
         </>
       )}
-
-      {isModalOpen && (
-        <ProjectsModal onClose={() => setIsModalOpen(false)} />
-      )}
     </div>
   );
 };
+
 
 export default Home;

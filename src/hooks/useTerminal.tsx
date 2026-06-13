@@ -7,7 +7,7 @@ export interface TerminalLine {
   content: string | React.ReactNode;
 }
 
-export const useTerminal = (onOpenModal: () => void) => {
+export const useTerminal = () => {
   const [history, setHistory] = useState<TerminalLine[]>([
     { 
       type: 'output', 
@@ -161,7 +161,7 @@ export const useTerminal = (onOpenModal: () => void) => {
         });
         break;
 
-      case 'project':
+      case 'project': {
         const projectId = args[1];
         const project = projects.find(p => p.id === projectId);
         if (!projectId || !project) {
@@ -232,6 +232,7 @@ export const useTerminal = (onOpenModal: () => void) => {
           });
         }
         break;
+      }
 
       case 'blogs':
         addLine({
@@ -252,7 +253,7 @@ export const useTerminal = (onOpenModal: () => void) => {
         });
         break;
 
-      case 'blog':
+      case 'blog': {
         const blogId = args[1];
         const blog = blogs.find(b => b.id === blogId);
         if (!blogId || !blog) {
@@ -280,6 +281,7 @@ export const useTerminal = (onOpenModal: () => void) => {
           });
         }
         break;
+      }
 
       case 'contact':
         addLine({
@@ -319,7 +321,7 @@ export const useTerminal = (onOpenModal: () => void) => {
           content: `Command not found: ${command}. Type 'help' for assist.` 
         });
     }
-  }, [addLine, clearHistory, onOpenModal]);
+  }, [addLine, clearHistory]);
 
   return { history, executeCommand, addLine };
 };

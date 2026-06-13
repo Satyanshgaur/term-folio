@@ -8,9 +8,9 @@ import Footer from './components/layout/Footer';
 import CustomCursor from './components/layout/CustomCursor';
 
 function AppContent() {
-  const [hasEntered, setHasEntered] = useState(false);
-  const [isTerminalMode, setIsTerminalMode] = useState(true);
   const location = useLocation();
+  const [hasEntered, setHasEntered] = useState(() => location.pathname !== '/');
+  const [isTerminalMode, setIsTerminalMode] = useState(true);
 
   useEffect(() => {
     if (location.pathname !== '/') {

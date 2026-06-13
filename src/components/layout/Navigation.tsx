@@ -51,7 +51,7 @@ const Navigation: React.FC<NavigationProps> = ({ isTerminalMode, onToggleView })
       <div className="flex items-center gap-6">
         <div className="flex gap-4">
           <a 
-            href="https://github.com/satyansh-gaur" 
+            href="https://github.com/satyanshgaur" 
             target="_blank" 
             rel="noopener noreferrer"
             className="text-text-main/50 hover:text-syntax-purple transition-colors"
@@ -59,13 +59,18 @@ const Navigation: React.FC<NavigationProps> = ({ isTerminalMode, onToggleView })
             <span className="material-symbols-outlined text-[20px]">terminal</span>
           </a>
           <a 
-            href="#" 
+            href="https://www.linkedin.com/in/satyansh-gaur-2b1b05370" 
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-text-main/50 hover:text-syntax-blue transition-colors"
           >
             <span className="material-symbols-outlined text-[20px]">public</span>
           </a>
         </div>
-        <button className="px-4 py-1.5 bg-syntax-purple/20 text-syntax-purple border border-syntax-purple/30 font-mono text-[11px] uppercase tracking-widest hover:bg-syntax-purple/30 transition-all rounded">
+        <button 
+          onClick={() => window.location.href = 'mailto:satyanshgaur0@gmail.com'}
+          className="px-4 py-1.5 bg-syntax-purple/20 text-syntax-purple border border-syntax-purple/30 font-mono text-[11px] uppercase tracking-widest hover:bg-syntax-purple/30 transition-all rounded"
+        >
           Resume
         </button>
       </div>
