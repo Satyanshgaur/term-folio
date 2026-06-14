@@ -38,7 +38,18 @@ async function testConnection() {
 
     console.log(`Response Status: ${response.status} ${response.statusText}`);
     
-    const data: any = await response.json();
+    interface OpenRouterResponse {
+      choices?: {
+        message?: {
+          content?: string;
+        };
+      }[];
+      error?: {
+        message?: string;
+      };
+    }
+
+    const data = await response.json() as OpenRouterResponse;
     
     if (response.ok) {
       console.log('--- SUCCESS ---');

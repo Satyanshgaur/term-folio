@@ -169,7 +169,18 @@ GUIDELINES:
 
     console.log(`[Neural_Link] OpenRouter Response Status: ${response.status} ${response.statusText}`);
 
-    const data: any = await response.json();
+    interface OpenRouterResponse {
+      choices?: {
+        message?: {
+          content?: string;
+        };
+      }[];
+      error?: {
+        message?: string;
+      };
+    }
+
+    const data = await response.json() as OpenRouterResponse;
     
     if (!response.ok) {
       console.error('[Neural_Link] OpenRouter Error Body:', JSON.stringify(data, null, 2));
