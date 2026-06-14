@@ -1,6 +1,20 @@
 # Satyansh Gaur | AI Infrastructure Portfolio
 
-Here is the repository for my personal portfolio, explore it at satyansh.indevs.in to know about me. 
+<p align="center">
+  <img src="https://img.shields.io/badge/React-19.2.6-111827?style=for-the-badge&logo=react&logoColor=82aaff" alt="React">
+  <img src="https://img.shields.io/badge/AI--Powered-Neural_Link-111827?style=for-the-badge&logo=nvidia&logoColor=c792ea" alt="AI">
+  <img src="https://img.shields.io/badge/Systems-Infrastructure-111827?style=for-the-badge&logo=linux&logoColor=c3e88d" alt="Systems">
+</p>
+
+---
+
+<p align="center">
+  <a href="https://satyansh.indevs.in" target="_blank">
+    <img src="https://img.shields.io/badge/Access_Workstation_Workspace-111827?style=for-the-badge&logo=terminal&logoColor=82aaff" alt="Click for demo" height="45">
+  </a>
+</p>
+
+Here is the repository for my personal portfolio, explore it at [satyansh.indevs.in](https://satyansh.indevs.in) to know about me. 
 
 ## 🚀 Key Features
 
@@ -30,7 +44,7 @@ Here is the repository for my personal portfolio, explore it at satyansh.indevs.
 
 The application is built with a focus on **Precision Engineering** and **Type Safety**:
 
-- **Core**: React 18 with TypeScript for robust, maintainable components.
+- **Core**: React 19 with TypeScript for robust, maintainable components.
 - **Styling**: Tailwind CSS utilizing a custom-ported Tokyo Night and Catppuccin color palette.
 - **Routing**: React Router DOM managing individual project/blog URLs for direct artifact access.
 - **Data Layer**: Centralized, high-fidelity project and research data managed in structured TypeScript directories.
