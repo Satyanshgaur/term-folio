@@ -1,8 +1,6 @@
 # Satyansh Gaur | AI Infrastructure Portfolio
 
-Here is the repository for my personal portfolio project—a high-fidelity, workstation-style environment designed to showcase systems engineering and AI infrastructure expertise.
-
-This platform moves beyond the traditional static portfolio, offering a dual-layered experience that mirrors a modern developer workstation. It blends a deep **Tokyo Night** aesthetic with functional **Glassmorphism** and a fully interactive **Shell Environment**.
+Here is the repository for my personal portfolio, explore it at satyansh.indevs.in to know about me. 
 
 ## 🚀 Key Features
 
