@@ -13,6 +13,7 @@ interface HomeProps {
 
 const Home: React.FC<HomeProps> = ({ onEnter, hasEntered, isTerminalMode, onToggleTerminal }) => {
   const [isExiting, setIsExiting] = useState(false);
+  const [activeContextId, setActiveContextId] = useState<string | null>(null);
 
   const handleEnter = (isTerminal: boolean) => {
     setIsExiting(true);
@@ -33,7 +34,7 @@ const Home: React.FC<HomeProps> = ({ onEnter, hasEntered, isTerminalMode, onTogg
           <div className="flex-1 min-w-0 h-full relative">
             {isTerminalMode ? (
               <div className="h-full w-full animate-fade-in pt-16">
-                <Terminal />
+                <Terminal onActiveContextChange={setActiveContextId} />
               </div>
             ) : (
               <div className="h-full w-full pt-16 overflow-hidden">
@@ -43,13 +44,12 @@ const Home: React.FC<HomeProps> = ({ onEnter, hasEntered, isTerminalMode, onTogg
           </div>
 
           <div className={`transition-all duration-1000 transform ${hasEntered ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}`}>
-            <WorkstationSidebar />
+            <WorkstationSidebar activeContextId={activeContextId} />
           </div>
         </>
       )}
     </div>
   );
 };
-
 
 export default Home;

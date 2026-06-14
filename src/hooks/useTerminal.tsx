@@ -7,7 +7,7 @@ export interface TerminalLine {
   content: string | React.ReactNode;
 }
 
-export const useTerminal = () => {
+export const useTerminal = (onActiveContextChange?: (id: string | null) => void) => {
   const [history, setHistory] = useState<TerminalLine[]>([
     { 
       type: 'output', 
@@ -23,6 +23,13 @@ export const useTerminal = () => {
       ) 
     }
   ]);
+  
+  const [activeContext, setActiveContextState] = useState<string | null>(null);
+
+  const setActiveContext = useCallback((id: string | null) => {
+    setActiveContextState(id);
+    if (onActiveContextChange) onActiveContextChange(id);
+  }, [onActiveContextChange]);
 
   const addLine = useCallback((line: TerminalLine) => {
     setHistory((prev) => [...prev, line]);
@@ -32,7 +39,7 @@ export const useTerminal = () => {
     setHistory([]);
   }, []);
 
-  const executeCommand = useCallback((cmd: string) => {
+  const executeCommand = useCallback(async (cmd: string) => {
     const command = cmd.trim().toLowerCase();
     const args = command.split(' ');
     const mainCmd = args[0];
@@ -56,6 +63,7 @@ export const useTerminal = () => {
               <div><span className="syntax-purple font-medium">blogs</span> <span className="opacity-40">- Writeups</span></div>
               <div><span className="syntax-purple font-medium">project [id]</span> <span className="opacity-40">- System specs</span></div>
               <div><span className="syntax-purple font-medium">blog [id]</span> <span className="opacity-40">- Read journal</span></div>
+              <div><span className="syntax-purple font-medium">ask [query]</span> <span className="opacity-40">- AI Assistant</span></div>
             </div>
           )
         });
@@ -167,6 +175,7 @@ export const useTerminal = () => {
         if (!projectId || !project) {
           addLine({ type: 'error', content: `Usage: project [id]. Available IDs: ${projects.map(p => p.id).join(', ')}` });
         } else {
+          setActiveContext(project.id);
           addLine({
             type: 'output',
             content: (
@@ -227,6 +236,10 @@ export const useTerminal = () => {
                       </div>
                    </div>
                 </div>
+                <div className="p-4 bg-syntax-blue/5 border border-syntax-blue/20 rounded-lg">
+                   <p className="text-[10px] uppercase tracking-widest text-syntax-blue font-bold">Neural_Link Enabled</p>
+                   <p className="text-xs text-text-main/60 mt-1">You can now use <span className="text-syntax-purple">'ask [question]'</span> to learn more about this artifact.</p>
+                </div>
               </div>
             )
           });
@@ -259,6 +272,7 @@ export const useTerminal = () => {
         if (!blogId || !blog) {
           addLine({ type: 'error', content: `Usage: blog [id]. Available IDs: ${blogs.map(b => b.id).join(', ')}` });
         } else {
+          setActiveContext(blog.id);
           addLine({
             type: 'output',
             content: (
@@ -276,6 +290,10 @@ export const useTerminal = () => {
                      <p key={i} className="mb-4">{line.trim()}</p>
                    ))}
                 </div>
+                <div className="mt-12 p-4 bg-syntax-purple/5 border border-syntax-purple/20 rounded-lg">
+                   <p className="text-[10px] uppercase tracking-widest text-syntax-purple font-bold">Neural_Link Enabled</p>
+                   <p className="text-xs text-text-main/60 mt-1">Ask questions about this entry using <span className="text-syntax-blue">'ask [question]'</span>.</p>
+                </div>
               </div>
             )
           });
@@ -283,26 +301,45 @@ export const useTerminal = () => {
         break;
       }
 
-      case 'contact':
-        addLine({
-          type: 'output',
-          content: (
-            <div className="mt-4 space-y-4">
-              <p className="text-text-main/50 italic text-sm mb-4">Establishing connectivity protocol...</p>
-              <div className="grid grid-cols-1 gap-3 text-sm">
-                <div className="flex items-center gap-4">
-                  <span className="text-syntax-purple uppercase tracking-[0.2em] text-[10px] font-bold w-20">Email</span>
-                  <span className="text-text-main/80">satyansh@gaur.dev</span>
-                </div>
-                <div className="flex items-center gap-4">
-                  <span className="text-syntax-blue uppercase tracking-[0.2em] text-[10px] font-bold w-20">X/Twitter</span>
-                  <span className="text-text-main/80">@satyansh_gaur</span>
-                </div>
-              </div>
-            </div>
-          )
-        });
+      case 'ask': {
+        const question = args.slice(1).join(' ');
+        if (!activeContext) {
+          addLine({ type: 'error', content: "No active context. Please open a project or blog first (e.g., 'project graphmem')." });
+        } else if (!question) {
+          addLine({ type: 'error', content: "Usage: ask [your question about the active artifact]." });
+        } else {
+          addLine({ type: 'info', content: '[ Neural_Link: Processing request... ]' });
+          
+          try {
+            const response = await fetch('/api/ask', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ context: activeContext, question })
+            });
+            
+            const data = await response.json();
+            if (response.ok) {
+              addLine({ 
+                type: 'output', 
+                content: (
+                  <div className="mt-2 p-6 bg-syntax-blue/5 border border-syntax-blue/20 rounded-lg max-w-3xl animate-fade-in">
+                    <div className="flex items-center gap-2 mb-4 opacity-40">
+                       <span className="material-symbols-outlined text-[16px]">psychology</span>
+                       <span className="text-[9px] uppercase tracking-[0.3em] font-bold">AI_Response_Buffer</span>
+                    </div>
+                    <p className="text-sm leading-relaxed text-text-main/90">{data.response}</p>
+                  </div>
+                )
+              });
+            } else {
+              addLine({ type: 'error', content: `Neural_Link Error: ${data.error || 'Connection failed.'}` });
+            }
+          } catch {
+            addLine({ type: 'error', content: 'CRITICAL ERROR: Failed to establish neural connection.' });
+          }
+        }
         break;
+      }
 
       case 'clear':
         clearHistory();
@@ -321,7 +358,7 @@ export const useTerminal = () => {
           content: `Command not found: ${command}. Type 'help' for assist.` 
         });
     }
-  }, [addLine, clearHistory]);
+  }, [addLine, clearHistory, activeContext, setActiveContext]);
 
   return { history, executeCommand, addLine };
 };

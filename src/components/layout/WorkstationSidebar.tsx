@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 
-const WorkstationSidebar: React.FC = () => {
+interface WorkstationSidebarProps {
+  activeContextId?: string | null;
+}
+
+const WorkstationSidebar: React.FC<WorkstationSidebarProps> = ({ activeContextId }) => {
   const [gpuLoad, setGpuLoad] = useState(71);
   const [ramLoad, setRamLoad] = useState(14.2);
 
@@ -83,11 +87,13 @@ const WorkstationSidebar: React.FC = () => {
       {/* Latest Artifact */}
       <section className="mt-auto">
         <div className="p-4 border border-syntax-blue/20 bg-syntax-blue/5 rounded-lg">
-          <span className="text-[9px] uppercase tracking-widest text-syntax-blue font-bold block mb-2">Latest_Build</span>
-          <p className="text-[11px] text-text-main/80 font-medium">GraphRAG_Engine v2.4.0</p>
+          <span className="text-[9px] uppercase tracking-widest text-syntax-blue font-bold block mb-2">Active_Session_Data</span>
+          <p className="text-[11px] text-text-main/80 font-medium truncate uppercase tracking-tighter">
+            {activeContextId || 'Default_Workspace'}
+          </p>
           <div className="flex items-center gap-2 mt-2">
-             <span className="w-1.5 h-1.5 rounded-full bg-syntax-green"></span>
-             <span className="text-[9px] uppercase text-text-main/40 tracking-widest font-mono">Passing Checks</span>
+             <span className="w-1.5 h-1.5 rounded-full bg-syntax-green animate-pulse"></span>
+             <span className="text-[9px] uppercase text-text-main/40 tracking-widest font-mono">Kernel Synchronized</span>
           </div>
         </div>
       </section>

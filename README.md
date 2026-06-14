@@ -49,8 +49,23 @@ The application is built with a focus on **Precision Engineering** and **Type Sa
 | `blogs` | Access the research journal entries. |
 | `blog [id]` | Render a specific research entry directly in the shell buffer. |
 | `skills` | Display the technical stack (Systems, AI Infra, Kernels). |
+| `ask [query]` | Communicate with the Context-Aware AI Assistant (`Neural_Link`). |
 | `resume` | Stream the professional manifest to the browser. |
 | `clear` | Wipe the terminal buffer. |
+
+## 🚀 Deployment & Security
+
+### 🔐 Security First
+- **Secrets Management**: This project uses environment variables for the `OPENROUTER_API_KEY`. 
+- **Git Safety**: All `.env` files are explicitly excluded via `.gitignore` to prevent credential leakage.
+- **Backend Isolation**: AI logic is contained in Vercel Serverless Functions (`api/`), ensuring the API key is never exposed to the client-side browser code.
+
+### 🌐 Vercel Hosting
+1.  **Push** this repository to GitHub.
+2.  **Import** the project into the [Vercel Dashboard](https://vercel.com).
+3.  **Configure Environment Variables**: In Vercel, navigate to `Settings > Environment Variables` and add:
+    - `OPENROUTER_API_KEY`: Your production key.
+4.  **Launch**: Vercel will automatically deploy the site with secure backend access.
 
 ---
 
