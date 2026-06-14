@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import * as dotenv from 'dotenv';
-import handler from '../api/ask.js';
+import handler from './local-ask-handler.js';
 
 dotenv.config();
 

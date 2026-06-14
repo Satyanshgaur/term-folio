@@ -89,23 +89,19 @@ export default async function handler(req, res) {
 
   const { context, question } = req.body;
 
-  // 1. Validation: Basic existence
   if (!context || !question) {
     return res.status(400).json({ error: 'Missing context or question' });
   }
 
-  // 2. Security: Command length check
   if (question.length > 300) {
     return res.status(400).json({ error: 'Question exceeds maximum length of 300 characters.' });
   }
 
-  // 3. Security: Context whitelist check
   const technicalContext = projectsContext[context] || blogsContext[context];
   if (!technicalContext) {
     return res.status(400).json({ error: 'Invalid or restricted context ID.' });
   }
 
-  // 4. Rate Limiting (IP-based)
   const ip = req.headers['x-forwarded-for'] || 'anonymous';
   const now = Date.now();
   const userLimit = rateLimitMap.get(ip) || { count: 0, lastReset: now };
@@ -115,14 +111,13 @@ export default async function handler(req, res) {
     userLimit.lastReset = now;
   }
   
-  if (userLimit.count >= 10) { // Increased for local testing
+  if (userLimit.count >= 10) { 
     return res.status(429).json({ error: 'Rate limit exceeded. Please wait a minute.' });
   }
   
   userLimit.count++;
   rateLimitMap.set(ip, userLimit);
 
-  // 5. OpenRouter API Call
   try {
     if (!process.env.OPENROUTER_API_KEY) {
       console.error('CRITICAL: OPENROUTER_API_KEY is missing from environment.');
