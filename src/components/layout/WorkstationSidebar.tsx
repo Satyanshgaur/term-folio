@@ -17,7 +17,7 @@ const WorkstationSidebar: React.FC<WorkstationSidebarProps> = ({ activeContextId
   }, []);
 
   return (
-    <aside className="w-screen sm:w-80 h-full bg-bg-deep lg:bg-surface-glass border-l border-border-glass p-8 flex flex-col gap-12 font-mono overflow-y-auto terminal-scroll shadow-2xl">
+    <aside className="w-screen sm:w-80 h-screen bg-bg-deep lg:bg-surface-glass border-l border-border-glass p-8 flex flex-col gap-12 font-mono overflow-y-auto terminal-scroll shadow-2xl sticky top-0">
       {/* System Monitor */}
       <section className="space-y-6">
         <h3 className="text-[10px] font-bold text-text-main/30 uppercase tracking-[0.3em] flex items-center gap-2">

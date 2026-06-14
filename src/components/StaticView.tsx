@@ -5,7 +5,7 @@ import { blogs } from '../data/blogs';
 
 const StaticView: React.FC = () => {
   return (
-    <div className="max-w-6xl w-full mx-auto px-margin-desktop py-24 space-y-32 overflow-y-auto max-h-screen terminal-scroll pb-40">
+    <div className="max-w-6xl w-full mx-auto px-margin-desktop py-24 space-y-32 pb-40">
       {/* Profile Section */}
       <section className="space-y-12 animate-fade-in">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-border-glass pb-12">

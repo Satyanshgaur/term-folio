@@ -25,7 +25,7 @@ const Home: React.FC<HomeProps> = ({ onEnter, hasEntered, isTerminalMode, onTogg
   };
 
   return (
-    <div className="relative h-screen w-full flex overflow-hidden">
+    <div className="w-full flex">
       {!hasEntered && (
         <EntranceScreen onEnter={handleEnter} isExiting={isExiting} />
       )}

@@ -16,7 +16,7 @@ function AppContent() {
   const hasEntered = internalHasEntered || location.pathname !== '/';
 
   return (
-    <div className="min-h-screen bg-bg-deep text-text-main selection:bg-syntax-blue/30 font-mono relative overflow-hidden">
+    <div className="min-h-screen bg-bg-deep text-text-main selection:bg-syntax-blue/30 font-mono relative overflow-x-hidden overflow-y-auto terminal-scroll">
       {/* Dynamic Background Glow */}
       <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-syntax-blue/5 blur-[120px] rounded-full pointer-events-none"></div>
       <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-syntax-purple/5 blur-[100px] rounded-full pointer-events-none"></div>
