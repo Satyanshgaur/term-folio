@@ -352,6 +352,43 @@ export const useTerminal = (onActiveContextChange?: (id: string | null) => void)
         }, 800);
         break;
 
+      case 'contact':
+        addLine({
+          type: 'output',
+          content: (
+            <div className="space-y-4 mt-4 max-w-xl border border-border-glass p-6 rounded-lg bg-white/5 backdrop-blur-md">
+              <h4 className="text-syntax-blue uppercase text-[10px] font-bold tracking-[0.2em] opacity-60">[ CONNECTIVITY_CHANNELS ]</h4>
+              <div className="space-y-3 font-mono text-sm">
+                <div className="flex items-center gap-4">
+                  <span className="w-24 text-syntax-purple font-medium">GitHub:</span>
+                  <a href="https://github.com/satyanshgaur" target="_blank" rel="noopener noreferrer" className="text-text-main/80 hover:text-syntax-blue underline underline-offset-4">
+                    github.com/satyanshgaur
+                  </a>
+                </div>
+                <div className="flex items-center gap-4">
+                  <span className="w-24 text-syntax-purple font-medium">LinkedIn:</span>
+                  <a href="https://www.linkedin.com/in/satyansh-gaur-2b1b05370" target="_blank" rel="noopener noreferrer" className="text-text-main/80 hover:text-syntax-blue underline underline-offset-4">
+                    linkedin.com/in/satyansh-gaur-2b1b05370
+                  </a>
+                </div>
+                <div className="flex items-center gap-4">
+                  <span className="w-24 text-syntax-purple font-medium">X (Twitter):</span>
+                  <a href="https://x.com/GaurSatyansh" target="_blank" rel="noopener noreferrer" className="text-text-main/80 hover:text-syntax-blue underline underline-offset-4">
+                    x.com/GaurSatyansh
+                  </a>
+                </div>
+                <div className="flex items-center gap-4">
+                  <span className="w-24 text-syntax-purple font-medium">Email:</span>
+                  <a href="mailto:satyanshgaur0@gmail.com" className="text-text-main/80 hover:text-syntax-blue underline underline-offset-4">
+                    satyanshgaur0@gmail.com
+                  </a>
+                </div>
+              </div>
+            </div>
+          )
+        });
+        break;
+
       default:
         addLine({ 
           type: 'error', 
