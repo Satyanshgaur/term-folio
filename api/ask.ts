@@ -54,6 +54,14 @@ const projectsContext: Record<string, string> = {
     Stack: Java 11+, Raw TCP Sockets, Thread Pools.
     Key Metrics: Configurable worker pool, Sub-ms latency, Lock-guarded safety.
     Features: Concurrent sessions, Worker pool, SORT/FACTORIAL/REVERSE tasks, Graceful error handling.
+  `,
+  'communeos': `
+    Project: CommuneOS
+    Subtitle: AI-Powered Community Operations Agent (Paytm Hackathon Winner)
+    Description: Multi-agent system observing profile patterns and indexing resources into ChromaDB to personalize community space.
+    Stack: FastAPI, Next.js 15, agentfield SDK, ChromaDB, Groq/OpenRouter.
+    Key Metrics: 1st Place (Paytm Hackathon Winner), 6 Collaborating Agents.
+    Features: PyMuPDF PDF RAG pipeline, local regex scanner fallback, dynamic roadmaps, mentor calculations, health audits, organizer action lists.
   `
 };
 
@@ -67,6 +75,11 @@ const blogsContext: Record<string, string> = {
     Blog: CUDA Memory Hierarchy Optimization
     Topic: GPU Architecture
     Content: Covers data flow through the GPU from global memory to registers. Explores shared memory banking and techniques like padding to avoid conflicts and serialize requests.
+  `,
+  'communeos-development-story': `
+    Blog: Behind CommuneOS: Building a Cooperative Multi-Agent Network (Paytm Hackathon Winner)
+    Topic: Software Architecture
+    Content: Explores creating CommuneOS. Solves single-agent context pollution, high latency, and fragile schemas by building a cooperative multi-agent network (Identity, Discovery, Learning, Mentor, Health, Organizer, Memory). Details resume extraction via PyMuPDF with local regex fallback, ChromaDB vector search, mock-override testing (under 230ms), and 1-hour TTL caches.
   `
 };
 

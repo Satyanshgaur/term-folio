@@ -242,5 +242,77 @@ export const projects: ProjectData[] = [
       ## Bare-Metal Networking
       By working directly with Java Sockets and plain text protocols, the project demonstrates a clear understanding of low-level network communication and result routing.
     `
+  },
+  {
+    id: 'communeos',
+    title: 'CommuneOS',
+    subtitle: 'AI-Powered Community Operations Agent (Paytm Hackathon Winner)',
+    description: 'An intelligent multi-agent system that observes member profiles, interactions, and queries to dynamically personalize community environments and provide actionable operational intelligence.',
+    tags: ['Multi-Agent', 'FastAPI', 'Next.js', 'ChromaDB', 'agentfield'],
+    metrics: [
+      { label: 'Award', value: '1st Place', description: 'Winner of Paytm Hackathon' },
+      { label: 'Agents', value: '6 Collaborating', description: 'Under Orchestrator coordination' },
+      { label: 'Latency', value: '~230ms', description: 'Optimized offline mock execution' }
+    ],
+    stack: [
+      'Next.js 15+ (App Router)',
+      'React 19',
+      'TypeScript',
+      'Tailwind CSS',
+      'FastAPI',
+      'ChromaDB',
+      'agentfield SDK',
+      'Groq / OpenRouter',
+      'SQLAlchemy'
+    ],
+    features: [
+      'Multi-Agent Network: Coordinates six specialized agents (Identity, Discovery, Learning, Mentor, Health, Organizer) under the Memory Agent routing coordinator.',
+      'Resume Ingestion Pipeline: Extracts text via PyMuPDF (fitz), parses content via LLM schema structuring, and splits it into semantic ChromaDB chunks.',
+      'Dynamic Welcome Onboarding: Generates custom roadmaps, checklists, channel suggestions, and matches members with local mentors.',
+      'Community Health Audits: Monitors chat feeds to flag inactive members at risk of churn and surface ignored newcomer threads.',
+      'Operational Intelligence: Consolidates metrics, event suggestions, and moderator action items for community managers.'
+    ],
+    challenges: [
+      'Orchestrating 6 concurrent LLM agents without hitting extreme token limits or latency spikes, solved by introducing caching via CacheService (1-hour TTL) and local fallback processing.',
+      'Ensuring PyMuPDF PDF parser gracefully degrades to a local keyword matcher when model providers (Groq/OpenRouter) hit rate limits.',
+      'Designing a unified API compat layer to bind FastAPI Pydantic responses to Next.js Client component requirements.'
+    ],
+    githubUrl: 'https://github.com/Satyanshgaur/communeos',
+    demoUrl: 'https://github.com/Satyanshgaur/communeos',
+    engineeringLog: 'CommuneOS won 1st Place at the Paytm Hackathon. It moves beyond generic chat bots into a cooperative multi-agent operating system. By analyzing member patterns and indexing resources into ChromaDB, the orchestrator personalizes spaces for developers while giving organizers actionable insights.',
+    fullWriteup: `
+      ## The Architecture
+      
+      At the core of CommuneOS is a decentralized, multi-agent network operating on top of a shared vector memory layer. Rather than treating RAG as a simple query-response mechanism, CommuneOS partitions memory and intelligence into specialized agents:
+      
+      \`\`\`mermaid
+      graph TD
+          User[User Bio / Resume PDF] --> |Ingests| ResumeService[Resume Service]
+          ResumeService --> |Splits & Embeds| ChromaDB[(ChromaDB Vector Store)]
+          ChromaDB --> |Injects Context| MemoryAgent[Memory Agent]
+          
+          Orchestrator[Orchestrator] --> |Executes Loop| MemoryAgent
+          Orchestrator --> IdentityAgent[Identity Agent]
+          IdentityAgent --> DiscoveryAgent[Discovery Agent]
+          DiscoveryAgent --> LearningAgent[Learning Agent]
+          LearningAgent --> MentorAgent[Mentor Agent]
+          
+          ActivityLogs[Member Activity Logs] --> HealthAgent[Health Agent]
+          HealthAgent --> OrganizerAgent[Organizer Agent]
+          OrganizerAgent --> Dashboard[Organizer Action Dashboard]
+      \`\`\`
+      
+      ### 1. Ingestion and PDF RAG Pipeline
+      When a user uploads a PDF, the backend uses PyMuPDF (\`fitz\`) to extract text. A structured JSON schema is then built using Groq/OpenRouter. If rate limits are reached, the system falls back to a custom local keyword scanner matching against 30+ developer-centric keywords. The text is partitioned into five main categories: Education, Projects, Skills, Experience, and Career Goals, and embedded into local ChromaDB storage (\`backend/data/chroma_db\`).
+      
+      ### 2. Multi-Agent Personalization Loop
+      Once indexed, the \`Memory Agent\` coordinates with the \`Orchestrator\` to run five specialized agents:
+      * **Identity Agent**: Analyzes biography files and profile tags to identify background experience (Beginner, Intermediate, Advanced, Expert) and preferred learning styles.
+      * **Discovery Agent**: Matches relevant community channels, study groups, and events.
+      * **Learning Agent**: Designs a multi-week milestone learning roadmap and a daily checkbox checklist.
+      * **Mentor Agent**: Automatically calculates matching metrics against the mentor directory using cosine-similarity search on ChromaDB.
+      * **Community Health Agent**: Inspects engagement patterns to flag ignored newcomers or churn risks.
+      * **Organizer Agent**: Converts health alerts and trending topics into an actionable checklist for community managers.
+    `
   }
 ];
