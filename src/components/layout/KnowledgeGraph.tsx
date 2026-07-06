@@ -92,6 +92,12 @@ const INITIAL_LINKS: GraphLink[] = [
 const WIDTH = 320;
 const HEIGHT = 260;
 
+// Deterministic pseudo-random number generator to satisfy react-hooks/purity rules
+const pseudoRandom = (seed: number) => {
+  const x = Math.sin(seed + 1) * 10000;
+  return x - Math.floor(x);
+};
+
 const KnowledgeGraph: React.FC = () => {
   const navigate = useNavigate();
   const [filter, setFilter] = useState<'all' | 'project' | 'blog' | 'skill'>('all');
@@ -111,7 +117,7 @@ const KnowledgeGraph: React.FC = () => {
     INITIAL_NODES.map((node, index) => {
       // Place initial nodes in a circle with noise
       const angle = (index / INITIAL_NODES.length) * Math.PI * 2;
-      const radius = 60 + Math.random() * 20;
+      const radius = 60 + pseudoRandom(index) * 20;
       return {
         ...node,
         x: WIDTH / 2 + Math.cos(angle) * radius,
@@ -137,7 +143,7 @@ const KnowledgeGraph: React.FC = () => {
     setPan({ x: 0, y: 0 });
     nodesRef.current = INITIAL_NODES.map((node, index) => {
       const angle = (index / INITIAL_NODES.length) * Math.PI * 2;
-      const radius = 60 + Math.random() * 20;
+      const radius = 60 + pseudoRandom(index + 100) * 20;
       return {
         ...node,
         x: WIDTH / 2 + Math.cos(angle) * radius,
@@ -166,7 +172,7 @@ const KnowledgeGraph: React.FC = () => {
           const nodeB = currentNodes[j];
           
           let dx = nodeB.x - nodeA.x;
-          let dy = nodeB.y - nodeA.y;
+          const dy = nodeB.y - nodeA.y;
           if (dx === 0) dx = 0.1; // Prevent NaN
           const distSq = dx * dx + dy * dy;
           const dist = Math.sqrt(distSq);
