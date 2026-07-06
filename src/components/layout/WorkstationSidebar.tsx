@@ -91,11 +91,11 @@ const WorkstationSidebar: React.FC<WorkstationSidebarProps> = ({ activeContextId
 
       {/* Inspired By GraphMem */}
       <section className="space-y-4">
-        <h3 className="text-[10px] font-bold text-text-main/50 uppercase tracking-[0.3em]">Knowledge_Source</h3>
+        <h3 className="text-[10px] font-bold text-text-main/50 uppercase tracking-[0.3em]">Graph_built_using</h3>
         <div className="p-4 bg-white/5 border border-border-glass rounded-lg space-y-2">
-          <p className="text-xs text-text-main font-bold uppercase tracking-tight">GraphMem Integration</p>
+          <p className="text-xs text-text-main font-bold uppercase tracking-tight">RecalNet</p>
           <p className="text-xs text-text-main/80 leading-relaxed italic">
-            Inspired knowledge graph created locally by GraphMem.
+            Create local secure knowledge graphs for long term memory for LLM's.
           </p>
           <a 
             href="https://github.com/Satyanshgaur/RecalNet" 
