@@ -372,6 +372,12 @@ export const useTerminal = (onActiveContextChange?: (id: string | null) => void)
                   </a>
                 </div>
                 <div className="flex items-center gap-4">
+                  <span className="w-24 text-syntax-purple font-medium">Kaggle:</span>
+                  <a href="https://www.kaggle.com/satyanshgaur1" target="_blank" rel="noopener noreferrer" className="text-text-main/80 hover:text-syntax-blue underline underline-offset-4">
+                    kaggle.com/satyanshgaur1
+                  </a>
+                </div>
+                <div className="flex items-center gap-4">
                   <span className="w-24 text-syntax-purple font-medium">X (Twitter):</span>
                   <a href="https://x.com/GaurSatyansh" target="_blank" rel="noopener noreferrer" className="text-text-main/80 hover:text-syntax-blue underline underline-offset-4">
                     x.com/GaurSatyansh

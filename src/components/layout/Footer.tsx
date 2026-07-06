@@ -27,6 +27,14 @@ const Footer: React.FC = () => {
           LinkedIn
         </a>
         <a 
+          href="https://www.kaggle.com/satyanshgaur1" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="text-text-main/40 hover:text-syntax-yellow transition-colors uppercase tracking-widest"
+        >
+          Kaggle
+        </a>
+        <a 
           href="https://x.com/GaurSatyansh" 
           target="_blank" 
           rel="noopener noreferrer"

@@ -66,6 +66,15 @@ const Navigation: React.FC<NavigationProps> = ({ isTerminalMode, onToggleView })
           >
             <span className="material-symbols-outlined text-[20px]">public</span>
           </a>
+          <a 
+            href="https://www.kaggle.com/satyanshgaur1" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-text-main/50 hover:text-syntax-yellow transition-colors"
+            title="Kaggle Profile"
+          >
+            <span className="material-symbols-outlined text-[20px]">database</span>
+          </a>
         </div>
         <button 
           onClick={() => window.location.href = 'mailto:satyanshgaur0@gmail.com'}
