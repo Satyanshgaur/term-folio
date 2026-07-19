@@ -39,7 +39,7 @@ const Navigation: React.FC<NavigationProps> = ({ isTerminalMode, onToggleView })
             <span className="material-symbols-outlined text-[16px]">
               {isTerminalMode ? 'grid_view' : 'terminal'}
             </span>
-            <span className="hidden xs:inline">{isTerminalMode ? 'GUI' : 'Shell'}</span>
+            <span className="hidden xs:inline">{isTerminalMode ? 'Open windows' : 'Terminal'}</span>
           </button>
         )}
       </div>

@@ -33,17 +33,17 @@ const EntranceScreen: React.FC<EntranceScreenProps> = ({ onEnter, isExiting }) =
         
         <div className="flex flex-col md:flex-row gap-8 items-center justify-center mt-12">
           <button 
-            className="group relative px-10 py-4 bg-white/5 border border-border-glass rounded-lg overflow-hidden transition-all hover:border-syntax-purple/50 hover:bg-syntax-purple/5"
-            onClick={() => onEnter(true)}
-          >
-            <span className="relative z-10 font-mono text-[11px] uppercase tracking-widest text-syntax-purple group-hover:text-text-main transition-colors">[ Initial_Shell ]</span>
-          </button>
-          
-          <button 
             className="group relative px-10 py-4 bg-white/5 border border-border-glass rounded-lg overflow-hidden transition-all hover:border-syntax-blue/50 hover:bg-syntax-blue/5"
             onClick={() => onEnter(false)}
           >
-            <span className="relative z-10 font-mono text-[11px] uppercase tracking-widest text-syntax-blue group-hover:text-text-main transition-colors">[ Load_GUI ]</span>
+            <span className="relative z-10 font-mono text-[11px] uppercase tracking-widest text-syntax-blue group-hover:text-text-main transition-colors">[ Windows Users ]</span>
+          </button>
+
+          <button 
+            className="group relative px-10 py-4 bg-white/5 border border-border-glass rounded-lg overflow-hidden transition-all hover:border-syntax-purple/50 hover:bg-syntax-purple/5"
+            onClick={() => onEnter(true)}
+          >
+            <span className="relative z-10 font-mono text-[11px] uppercase tracking-widest text-syntax-purple group-hover:text-text-main transition-colors">[ Terminal ]</span>
           </button>
         </div>
 
