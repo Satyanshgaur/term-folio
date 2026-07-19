@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { projects } from '../data/projects';
 import { blogs } from '../data/blogs';
+import Card3DTilt from './layout/Card3DTilt';
 
 const StaticView: React.FC = () => {
   return (
@@ -86,53 +87,54 @@ const StaticView: React.FC = () => {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project) => (
-            <Link 
-              key={project.id}
-              to={`/projects/${project.id}`}
-              className="group relative p-8 bg-panel-glass border border-border-glass rounded-2xl overflow-hidden hover:border-syntax-blue/40 transition-all hover:shadow-[0_0_40px_rgba(130,170,255,0.08)] flex flex-col"
-            >
-              {/* Project Image Header */}
-              <div className="w-full h-44 mb-6 rounded-xl overflow-hidden border border-border-glass/40 relative bg-black/40 group-hover:border-syntax-blue/30 transition-colors">
-                {project.image ? (
-                  <>
-                    <img 
-                      src={project.image} 
-                      alt={project.title} 
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100" 
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-bg-deep via-transparent to-transparent opacity-60"></div>
-                    <div className="absolute top-2 right-2 px-2 py-0.5 bg-black/70 backdrop-blur-md border border-white/10 rounded text-[9px] font-mono text-syntax-blue uppercase tracking-wider font-bold">
-                      IMAGE_SNAPSHOT
+            <Card3DTilt key={project.id} className="h-full">
+              <Link 
+                to={`/projects/${project.id}`}
+                className="group relative p-8 bg-panel-glass border border-border-glass rounded-2xl overflow-hidden hover:border-syntax-blue/40 transition-all hover:shadow-[0_0_40px_rgba(130,170,255,0.12)] flex flex-col h-full"
+              >
+                {/* Project Image Header */}
+                <div className="w-full h-44 mb-6 rounded-xl overflow-hidden border border-border-glass/40 relative bg-black/40 group-hover:border-syntax-blue/30 transition-colors">
+                  {project.image ? (
+                    <>
+                      <img 
+                        src={project.image} 
+                        alt={project.title} 
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100" 
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-bg-deep via-transparent to-transparent opacity-60"></div>
+                      <div className="absolute top-2 right-2 px-2 py-0.5 bg-black/70 backdrop-blur-md border border-white/10 rounded text-[9px] font-mono text-syntax-blue uppercase tracking-wider font-bold">
+                        IMAGE_SNAPSHOT
+                      </div>
+                    </>
+                  ) : (
+                    <div className="w-full h-full flex flex-col items-center justify-center relative overflow-hidden bg-white/[0.02]">
+                      <div className="absolute inset-0 grid grid-cols-6 grid-rows-4 opacity-10 pointer-events-none">
+                        {[...Array(24)].map((_, i) => <div key={i} className="border border-white/20"></div>)}
+                      </div>
+                      <span className="material-symbols-outlined text-4xl text-syntax-blue/40 mb-1">terminal</span>
+                      <span className="text-[9px] font-mono uppercase tracking-widest text-text-main/30 font-bold">Architecture Spec</span>
                     </div>
-                  </>
-                ) : (
-                  <div className="w-full h-full flex flex-col items-center justify-center relative overflow-hidden bg-white/[0.02]">
-                    <div className="absolute inset-0 grid grid-cols-6 grid-rows-4 opacity-10 pointer-events-none">
-                      {[...Array(24)].map((_, i) => <div key={i} className="border border-white/20"></div>)}
-                    </div>
-                    <span className="material-symbols-outlined text-4xl text-syntax-blue/40 mb-1">terminal</span>
-                    <span className="text-[9px] font-mono uppercase tracking-widest text-text-main/30 font-bold">Architecture Spec</span>
-                  </div>
-                )}
-              </div>
+                  )}
+                </div>
 
-              <div className="relative z-10 space-y-4 flex-1 flex flex-col">
-                <span className="font-mono text-[10px] uppercase tracking-[0.3em] syntax-blue font-bold opacity-60">
-                  // {project.tags[0]}
-                </span>
-                <div>
-                  <h3 className="text-xl font-bold text-text-main uppercase tracking-tight group-hover:text-syntax-blue transition-colors mb-2">
-                    {project.title}
-                  </h3>
-                  <p className="text-text-main/50 text-xs leading-relaxed line-clamp-3">
-                    {project.description}
-                  </p>
+                <div className="relative z-10 space-y-4 flex-1 flex flex-col">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.3em] syntax-blue font-bold opacity-60">
+                    // {project.tags[0]}
+                  </span>
+                  <div>
+                    <h3 className="text-xl font-bold text-text-main uppercase tracking-tight group-hover:text-syntax-blue transition-colors mb-2">
+                      {project.title}
+                    </h3>
+                    <p className="text-text-main/50 text-xs leading-relaxed line-clamp-3">
+                      {project.description}
+                    </p>
+                  </div>
+                  <div className="mt-auto pt-6 flex items-center gap-3 text-[11px] font-mono uppercase tracking-[0.3em] text-syntax-blue opacity-40 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0 font-bold">
+                    Analyze_System <span className="material-symbols-outlined text-[16px]">arrow_right_alt</span>
+                  </div>
                 </div>
-                <div className="mt-auto pt-6 flex items-center gap-3 text-[11px] font-mono uppercase tracking-[0.3em] text-syntax-blue opacity-40 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0 font-bold">
-                  Analyze_System <span className="material-symbols-outlined text-[16px]">arrow_right_alt</span>
-                </div>
-              </div>
-            </Link>
+              </Link>
+            </Card3DTilt>
           ))}
         </div>
       </section>
