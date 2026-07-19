@@ -6,6 +6,7 @@ import BlogPost from './pages/BlogPost';
 import Navigation from './components/layout/Navigation';
 import Footer from './components/layout/Footer';
 import CustomCursor from './components/layout/CustomCursor';
+import ThreeConstellationBackground from './components/layout/ThreeConstellationBackground';
 
 function AppContent() {
   const location = useLocation();
@@ -17,6 +18,9 @@ function AppContent() {
 
   return (
     <div className="min-h-screen bg-bg-deep text-text-main selection:bg-syntax-blue/30 font-mono relative overflow-x-hidden overflow-y-auto terminal-scroll">
+      {/* 3D Interactive Three.js Constellation Background */}
+      <ThreeConstellationBackground />
+
       {/* Dynamic Background Glow */}
       <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-syntax-blue/5 blur-[120px] rounded-full pointer-events-none"></div>
       <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-syntax-purple/5 blur-[100px] rounded-full pointer-events-none"></div>
