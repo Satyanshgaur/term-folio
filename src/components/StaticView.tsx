@@ -9,15 +9,37 @@ const StaticView: React.FC = () => {
       {/* Profile Section */}
       <section className="space-y-12 animate-fade-in">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 border-b border-border-glass pb-12">
-          <div className="flex items-center gap-8">
-            <div className="w-24 h-24 rounded-2xl border border-border-glass bg-white/5 flex items-center justify-center backdrop-blur-2xl shadow-xl">
-              <span className="material-symbols-outlined text-5xl text-syntax-blue opacity-80">memory</span>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-8">
+            {/* Satyansh Photo Avatar */}
+            <div className="relative group shrink-0">
+              <div className="w-28 h-28 md:w-32 md:h-32 rounded-2xl overflow-hidden border border-syntax-blue/40 p-1 bg-white/5 backdrop-blur-2xl shadow-[0_0_35px_rgba(130,170,255,0.2)] group-hover:border-syntax-blue transition-all duration-500 relative">
+                <img 
+                  src="/photos/satyansh.jpeg" 
+                  alt="Satyansh Gaur" 
+                  className="w-full h-full object-cover rounded-xl group-hover:scale-105 transition-transform duration-500" 
+                  onError={(e) => {
+                    e.currentTarget.style.display = 'none';
+                    if (e.currentTarget.parentElement) {
+                      e.currentTarget.parentElement.classList.add('flex', 'items-center', 'justify-center');
+                      const icon = document.createElement('span');
+                      icon.className = 'material-symbols-outlined text-5xl text-syntax-blue opacity-80';
+                      icon.textContent = 'memory';
+                      e.currentTarget.parentElement.appendChild(icon);
+                    }
+                  }}
+                />
+              </div>
+              <div className="absolute -bottom-2 -right-2 px-2 py-0.5 bg-syntax-blue text-[9px] font-mono font-bold uppercase text-black rounded shadow tracking-wider">
+                FACE_ID OK
+              </div>
             </div>
+
             <div>
-              <h1 className="text-5xl font-bold text-text-main tracking-tighter uppercase mb-2">Satyansh Gaur</h1>
+              <h1 className="text-4xl md:text-5xl font-bold text-text-main tracking-tighter uppercase mb-2">Satyansh Gaur</h1>
               <p className="text-syntax-purple font-mono text-sm tracking-[0.3em] uppercase opacity-70">AI Infrastructure Engineer // Systems Programmer</p>
             </div>
           </div>
+
           <div className="flex gap-4">
              <div className="px-4 py-2 bg-white/5 border border-border-glass rounded text-[10px] font-mono uppercase tracking-widest text-text-main/40">
                 Lvl: Expert
@@ -67,24 +89,46 @@ const StaticView: React.FC = () => {
             <Link 
               key={project.id}
               to={`/projects/${project.id}`}
-              className="group relative p-10 bg-panel-glass border border-border-glass rounded-2xl overflow-hidden hover:border-syntax-blue/30 transition-all hover:shadow-[0_0_40px_rgba(130,170,255,0.05)] flex flex-col"
+              className="group relative p-8 bg-panel-glass border border-border-glass rounded-2xl overflow-hidden hover:border-syntax-blue/40 transition-all hover:shadow-[0_0_40px_rgba(130,170,255,0.08)] flex flex-col"
             >
-              <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-100 transition-all group-hover:text-syntax-blue transform translate-x-2 -translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0">
-                <span className="material-symbols-outlined text-4xl">terminal</span>
+              {/* Project Image Header */}
+              <div className="w-full h-44 mb-6 rounded-xl overflow-hidden border border-border-glass/40 relative bg-black/40 group-hover:border-syntax-blue/30 transition-colors">
+                {project.image ? (
+                  <>
+                    <img 
+                      src={project.image} 
+                      alt={project.title} 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-80 group-hover:opacity-100" 
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-bg-deep via-transparent to-transparent opacity-60"></div>
+                    <div className="absolute top-2 right-2 px-2 py-0.5 bg-black/70 backdrop-blur-md border border-white/10 rounded text-[9px] font-mono text-syntax-blue uppercase tracking-wider font-bold">
+                      IMAGE_SNAPSHOT
+                    </div>
+                  </>
+                ) : (
+                  <div className="w-full h-full flex flex-col items-center justify-center relative overflow-hidden bg-white/[0.02]">
+                    <div className="absolute inset-0 grid grid-cols-6 grid-rows-4 opacity-10 pointer-events-none">
+                      {[...Array(24)].map((_, i) => <div key={i} className="border border-white/20"></div>)}
+                    </div>
+                    <span className="material-symbols-outlined text-4xl text-syntax-blue/40 mb-1">terminal</span>
+                    <span className="text-[9px] font-mono uppercase tracking-widest text-text-main/30 font-bold">Architecture Spec</span>
+                  </div>
+                )}
               </div>
-              <div className="relative z-10 space-y-6 flex-1 flex flex-col">
-                <span className={`font-mono text-[10px] uppercase tracking-[0.3em] syntax-blue font-bold opacity-60`}>
+
+              <div className="relative z-10 space-y-4 flex-1 flex flex-col">
+                <span className="font-mono text-[10px] uppercase tracking-[0.3em] syntax-blue font-bold opacity-60">
                   // {project.tags[0]}
                 </span>
                 <div>
-                  <h3 className="text-2xl font-bold text-text-main uppercase tracking-tight group-hover:text-text-main transition-colors mb-3">
+                  <h3 className="text-xl font-bold text-text-main uppercase tracking-tight group-hover:text-syntax-blue transition-colors mb-2">
                     {project.title}
                   </h3>
-                  <p className="text-text-main/40 text-sm leading-relaxed">
+                  <p className="text-text-main/50 text-xs leading-relaxed line-clamp-3">
                     {project.description}
                   </p>
                 </div>
-                <div className="mt-auto pt-8 flex items-center gap-3 text-[11px] font-mono uppercase tracking-[0.3em] text-syntax-blue opacity-40 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0 font-bold">
+                <div className="mt-auto pt-6 flex items-center gap-3 text-[11px] font-mono uppercase tracking-[0.3em] text-syntax-blue opacity-40 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0 font-bold">
                   Analyze_System <span className="material-symbols-outlined text-[16px]">arrow_right_alt</span>
                 </div>
               </div>

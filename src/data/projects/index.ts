@@ -17,6 +17,7 @@ export interface ProjectData {
   demoUrl?: string;
   engineeringLog: string;
   fullWriteup: string;
+  image?: string;
 }
 
 export const projects: ProjectData[] = [
@@ -25,6 +26,7 @@ export const projects: ProjectData[] = [
     title: 'Satellite Link Optimizer',
     subtitle: 'Multi-Satellite Constellation Simulator',
     description: 'High-fidelity satellite communication simulator combining orbital propagation, atmospheric attenuation modeling, and stochastic rain fading.',
+    image: '/photos/satellite.png',
     tags: ['Python', 'SGP4', 'JIT', 'Numba'],
     metrics: [
       { label: 'Throughput', value: '275k/sec', description: 'Single-satellite vectorized mode' },
@@ -63,6 +65,7 @@ export const projects: ProjectData[] = [
     title: 'GraphMem (GraphRAG)',
     subtitle: 'Local-First Graph Memory Framework',
     description: 'Transforms unstructured documents into a persistent, queryable knowledge graph for long-term machine memory.',
+    image: '/photos/graphmem.png',
     tags: ['Local-LLM', 'Graph', 'SQLite', 'Ollama'],
     metrics: [
       { label: 'VRAM_Required', value: '6GB', description: 'Optimized for RTX 3050' },
@@ -100,6 +103,7 @@ export const projects: ProjectData[] = [
     title: 'Orbit Ops',
     subtitle: 'Hyperlocal Air Quality Forecasting Platform',
     description: 'Predicts neighborhood-level air pollution using satellite observations, ground sensors, and weather data.',
+    image: '/photos/orbit_ops.jpeg',
     tags: ['FastAPI', 'TimescaleDB', 'PostGIS', 'Next.js'],
     metrics: [
       { label: 'Downscaling', value: '10km -> Street', description: 'Hyperlocal prediction grid' },
@@ -137,6 +141,7 @@ export const projects: ProjectData[] = [
     title: 'Sahai AI',
     subtitle: 'AI-Powered Mental Health & Lifestyle Ecosystem',
     description: 'An AI-driven resilience platform for college students, integrating personalized AI therapy, lifestyle tracking, and peer communities.',
+    image: '/photos/Sahai.png',
     tags: ['LLMs', 'RAG', 'Django', 'React'],
     metrics: [
       { label: 'RAG_Accuracy', value: '94.2%', description: 'Evidence-based response score' },
@@ -174,6 +179,7 @@ export const projects: ProjectData[] = [
     title: 'Plant Scout',
     subtitle: 'Autonomous Field Scout & Classifier',
     description: 'End-to-end ML and robotics project for early plant disease detection using computer vision and autonomous navigation.',
+    image: '/photos/plant_scout.png',
     tags: ['PyTorch', 'ResNet9', 'CV', 'Robotics'],
     metrics: [
       { label: 'Arch', value: 'ResNet9', description: 'Optimized residual network' },
@@ -211,6 +217,7 @@ export const projects: ProjectData[] = [
     title: 'Task Server',
     subtitle: 'Multithreaded TCP Task Processor',
     description: 'A high-concurrency TCP server written in Java for processing computational tasks across dedicated worker pools.',
+    image: '/photos/mutltithreading.png',
     tags: ['Java', 'TCP/IP', 'Concurrency', 'Networking'],
     metrics: [
       { label: 'Concurrency', value: 'Thread-Pool', description: 'Configurable worker management' },
@@ -248,6 +255,7 @@ export const projects: ProjectData[] = [
     title: 'CommuneOS',
     subtitle: 'AI-Powered Community Operations Agent (Paytm Hackathon Winner)',
     description: 'An intelligent multi-agent system that observes member profiles, interactions, and queries to dynamically personalize community environments and provide actionable operational intelligence.',
+    image: '/photos/communeos.png',
     tags: ['Multi-Agent', 'FastAPI', 'Next.js', 'ChromaDB', 'agentfield'],
     metrics: [
       { label: 'Award', value: '1st Place', description: 'Winner of Paytm Hackathon' },

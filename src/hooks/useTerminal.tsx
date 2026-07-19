@@ -76,8 +76,15 @@ export const useTerminal = (onActiveContextChange?: (id: string | null) => void)
           content: (
             <div className="border border-border-glass p-6 rounded-lg bg-white/5 mt-4 max-w-2xl backdrop-blur-md">
               <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-12 rounded bg-syntax-blue/10 flex items-center justify-center border border-syntax-blue/20">
-                  <span className="material-symbols-outlined text-[32px] text-syntax-blue">memory</span>
+                <div className="w-14 h-14 rounded-xl overflow-hidden border border-syntax-blue/40 shrink-0 p-0.5 bg-white/5 shadow-[0_0_20px_rgba(130,170,255,0.2)]">
+                  <img 
+                    src="/photos/satyansh.jpeg" 
+                    alt="Satyansh Gaur" 
+                    className="w-full h-full object-cover rounded-lg"
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                    }}
+                  />
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-text-main uppercase tracking-tighter">Satyansh Gaur</h3>
@@ -139,6 +146,12 @@ export const useTerminal = (onActiveContextChange?: (id: string | null) => void)
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8 max-w-5xl">
               {projects.map(p => (
                 <div key={p.id} className="p-8 rounded-2xl border border-border-glass bg-white/5 backdrop-blur-sm group hover:border-syntax-blue/30 transition-all flex flex-col gap-6 shadow-2xl relative overflow-hidden">
+                  {p.image && (
+                    <div className="w-full h-36 rounded-xl overflow-hidden border border-border-glass/40 relative bg-black/40">
+                      <img src={p.image} alt={p.title} className="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-500" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-bg-deep via-transparent to-transparent pointer-events-none"></div>
+                    </div>
+                  )}
                   <div className="flex justify-between items-start relative z-10">
                     <h3 className="text-3xl font-bold text-text-main uppercase tracking-tighter">{p.title}</h3>
                     <div className="text-right">
@@ -185,6 +198,16 @@ export const useTerminal = (onActiveContextChange?: (id: string | null) => void)
                   <h2 className="text-5xl font-bold text-text-main uppercase tracking-tighter">{project.title}</h2>
                   <p className="text-xl text-text-main/60 font-light">{project.subtitle}</p>
                 </div>
+
+                {project.image && (
+                  <div className="w-full h-64 md:h-80 rounded-2xl overflow-hidden border border-border-glass relative bg-black/50 shadow-2xl">
+                    <img src={project.image} alt={project.title} className="w-full h-full object-cover opacity-90" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-bg-deep via-transparent to-transparent pointer-events-none"></div>
+                    <div className="absolute top-4 left-4 px-3 py-1 bg-black/70 backdrop-blur-md border border-white/10 rounded text-[10px] font-mono text-syntax-blue uppercase tracking-widest font-bold">
+                      SNAPSHOT // {project.id}
+                    </div>
+                  </div>
+                )}
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                   <div className="space-y-8">

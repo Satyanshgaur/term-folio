@@ -29,18 +29,37 @@ const ProjectDetail: React.FC = () => {
             <span className="h-px w-12 bg-border-glass"></span>
             <span>Ref: {project.id}</span>
           </div>
-          <h1 className="text-6xl font-bold text-text-main uppercase tracking-tighter">{project.title}</h1>
-          <p className="text-2xl text-text-main/50 font-light max-w-3xl leading-relaxed">{project.subtitle}</p>
+          <h1 className="text-5xl md:text-6xl font-bold text-text-main uppercase tracking-tighter">{project.title}</h1>
+          <p className="text-xl md:text-2xl text-text-main/50 font-light max-w-3xl leading-relaxed">{project.subtitle}</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          <div className="md:col-span-2 aspect-video w-full bg-white/5 rounded-2xl border border-border-glass flex flex-col items-center justify-center p-12 backdrop-blur-md relative overflow-hidden group hover:bg-white/10 transition-colors">
-            <div className="absolute inset-0 grid grid-cols-8 grid-rows-8 opacity-[0.03] pointer-events-none">
-              {[...Array(64)].map((_, i) => <div key={i} className="border border-text-main"></div>)}
-            </div>
-            <span className="material-symbols-outlined text-8xl text-text-main/10 group-hover:text-syntax-blue/20 transition-all scale-110">hub</span>
-            <p className="mt-8 text-[11px] uppercase tracking-[0.4em] text-text-main/30 font-bold">[ System_Architecture_Layer ]</p>
+          {/* Main Visual Display Area */}
+          <div className="md:col-span-2 aspect-video w-full rounded-2xl border border-border-glass overflow-hidden relative group bg-black/40 shadow-2xl backdrop-blur-md">
+            {project.image ? (
+              <div className="w-full h-full relative">
+                <img 
+                  src={project.image} 
+                  alt={project.title} 
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90 group-hover:opacity-100" 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-bg-deep/90 via-transparent to-transparent pointer-events-none"></div>
+                <div className="absolute top-4 left-4 px-3 py-1 bg-black/70 backdrop-blur-md border border-white/10 rounded text-[10px] font-mono text-syntax-blue uppercase tracking-widest font-bold flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-syntax-blue animate-pulse"></span>
+                  HIGH_RES_SNAPSHOT // {project.id}
+                </div>
+              </div>
+            ) : (
+              <div className="w-full h-full flex flex-col items-center justify-center p-12 relative overflow-hidden group-hover:bg-white/5 transition-colors">
+                <div className="absolute inset-0 grid grid-cols-8 grid-rows-8 opacity-[0.03] pointer-events-none">
+                  {[...Array(64)].map((_, i) => <div key={i} className="border border-text-main"></div>)}
+                </div>
+                <span className="material-symbols-outlined text-8xl text-text-main/10 group-hover:text-syntax-blue/20 transition-all scale-110">hub</span>
+                <p className="mt-8 text-[11px] uppercase tracking-[0.4em] text-text-main/30 font-bold">[ System_Architecture_Layer ]</p>
+              </div>
+            )}
           </div>
+
           <div className="space-y-10">
             <div className="p-8 border border-border-glass bg-panel-glass rounded-2xl space-y-6">
               <h4 className="text-[10px] uppercase tracking-[0.4em] font-bold text-syntax-yellow opacity-60">PERFORMANCE</h4>

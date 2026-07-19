@@ -13,7 +13,7 @@ const ProjectsModal: React.FC<ProjectsModalProps> = ({ onClose }) => {
         <div className="h-12 bg-white/5 flex items-center px-6 justify-between border-b border-border-glass">
           <div className="flex items-center gap-4">
             <div className="flex gap-1.5">
-              <div className="w-3 h-3 rounded-full traffic-light-red" onClick={onClose}></div>
+              <div className="w-3 h-3 rounded-full traffic-light-red cursor-pointer" onClick={onClose}></div>
               <div className="w-3 h-3 rounded-full traffic-light-yellow"></div>
               <div className="w-3 h-3 rounded-full traffic-light-green"></div>
             </div>
@@ -30,8 +30,20 @@ const ProjectsModal: React.FC<ProjectsModalProps> = ({ onClose }) => {
         <div className="flex-1 overflow-y-auto p-12 terminal-scroll bg-black/20">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project) => (
-              <div key={project.id} className="group relative p-8 bg-panel-glass border border-border-glass rounded-xl overflow-hidden hover:border-syntax-blue/30 transition-all flex flex-col">
-                <div className="relative z-10 space-y-6 flex-1 flex flex-col">
+              <div key={project.id} className="group relative p-6 bg-panel-glass border border-border-glass rounded-xl overflow-hidden hover:border-syntax-blue/40 transition-all flex flex-col">
+                {/* Project Image Header */}
+                {project.image && (
+                  <div className="w-full h-36 mb-4 rounded-lg overflow-hidden border border-border-glass/40 relative bg-black/40">
+                    <img 
+                      src={project.image} 
+                      alt={project.title} 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100" 
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-bg-deep/80 via-transparent to-transparent pointer-events-none"></div>
+                  </div>
+                )}
+
+                <div className="relative z-10 space-y-4 flex-1 flex flex-col">
                   <div className="flex justify-between items-start">
                     <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-syntax-blue font-bold opacity-60">
                       // {project.tags[0]}
@@ -46,7 +58,7 @@ const ProjectsModal: React.FC<ProjectsModalProps> = ({ onClose }) => {
                       {project.description}
                     </p>
                   </div>
-                  <div className="mt-auto pt-6 flex items-center justify-between border-t border-white/5">
+                  <div className="mt-auto pt-4 flex items-center justify-between border-t border-white/5">
                     <Link 
                       to={`/projects/${project.id}`} 
                       className="text-[10px] font-bold uppercase tracking-[0.2em] text-syntax-purple hover:underline underline-offset-4"
